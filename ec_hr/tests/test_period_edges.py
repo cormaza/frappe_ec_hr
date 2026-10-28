@@ -21,9 +21,7 @@ class TestFullMonthInvariant(UnitTestCase):
 					self.assertEqual(iess_billable_days(year, month), 30)
 					self.assertEqual(iess_billable_days(year, month, hire_date=first), 30)
 					self.assertEqual(iess_billable_days(year, month, exit_date=last), 30)
-					self.assertEqual(
-						iess_billable_days(year, month, hire_date=first, exit_date=last), 30
-					)
+					self.assertEqual(iess_billable_days(year, month, hire_date=first, exit_date=last), 30)
 
 
 class TestFebruaryEdges(UnitTestCase):
@@ -58,9 +56,7 @@ class TestRangeConsistency(UnitTestCase):
 
 	def test_hire_after_exit_fails(self) -> None:
 		with self.assertRaises(ValueError):
-			iess_billable_days(
-				2026, 3, hire_date=date(2026, 3, 20), exit_date=date(2026, 3, 10)
-			)
+			iess_billable_days(2026, 3, hire_date=date(2026, 3, 20), exit_date=date(2026, 3, 10))
 
 	def test_cross_year_boundary_month_is_full(self) -> None:
 		# Hired Dec 2025: January 2026 counts whole (outer-side rule).
