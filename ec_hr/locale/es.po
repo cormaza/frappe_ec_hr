@@ -566,3 +566,83 @@ msgstr "El plazo del préstamo debe ser de al menos un mes."
 #: ec_hr/payroll/income_tax.py
 msgid "Months remaining must be at least one."
 msgstr "Los meses restantes deben ser al menos uno."
+
+#: ec_hr/payroll/rdep.py:218
+msgid "Duplicate RDEP worker: {0}."
+msgstr "Trabajador RDEP duplicado: {0}."
+
+#: ec_hr/payroll/rdep.py:211
+msgid "Employer RUC must be exactly 13 digits."
+msgstr "El RUC del empleador debe tener exactamente 13 dígitos."
+
+#: ec_hr/payroll/rdep.py:193
+msgid "RDEP amount cannot be negative: {0}."
+msgstr "El monto RDEP no puede ser negativo: {0}."
+
+#: ec_hr/payroll/rdep.py:189
+msgid "RDEP dependent count out of range: {0}."
+msgstr "El número de dependientes RDEP está fuera de rango: {0}."
+
+#: ec_hr/payroll/rdep.py:184
+msgid "RDEP disability percent out of range: {0}."
+msgstr "El porcentaje de discapacidad RDEP está fuera de rango: {0}."
+
+#: ec_hr/payroll/rdep.py:159
+msgid "RDEP field {0} has an invalid value: {1}."
+msgstr "El campo RDEP {0} tiene un valor inválido: {1}."
+
+#: ec_hr/payroll/rdep.py:174
+msgid "RDEP field {0} needs 3 digits: {1}."
+msgstr "El campo RDEP {0} requiere 3 dígitos: {1}."
+
+#: ec_hr/payroll/rdep.py:179
+msgid "RDEP sisSalNet must be 1 or 2: {0}."
+msgstr "El sisSalNet RDEP debe ser 1 o 2: {0}."
+
+#: ec_hr/payroll/rdep.py:151
+msgid "RDEP worker has unknown fields: {0}."
+msgstr "El trabajador RDEP tiene campos desconocidos: {0}."
+
+#: ec_hr/payroll/rdep.py:169
+msgid "RDEP worker id is invalid: {0}."
+msgstr "La identificación del trabajador RDEP es inválida: {0}."
+
+#: ec_hr/payroll/rdep.py:146
+msgid "RDEP worker lacks required field: {0}."
+msgstr "Al trabajador RDEP le falta el campo obligatorio: {0}."
+
+#: ec_hr/payroll/rdep.py:164
+msgid "RDEP worker name is invalid: {0}."
+msgstr "El nombre del trabajador RDEP es inválido: {0}."
+
+#: ec_hr/payroll/rdep.py:213
+msgid "RDEP year is invalid: {0}."
+msgstr "El año RDEP es inválido: {0}."
+
+#: ec_hr/payroll/payments.py:110
+msgid "Unknown account kind: {0}."
+msgstr "Tipo de cuenta desconocido: {0}."
+
+#: ec_hr/payroll/payments.py:115
+msgid "Unknown ID kind: {0}."
+msgstr "Tipo de identificación desconocido: {0}."
+
+#: ec_hr/payroll/payments.py:107
+msgid "Payment row amount must be positive: valor."
+msgstr "El valor de la fila de pago debe ser positivo."
+
+#: ec_hr/payroll/payments.py:105
+msgid "Payment row lacks identity: contrapartida."
+msgstr "Falta la contrapartida en la fila de pago."
+
+#: ec_hr/payroll/payments.py:119
+msgid "Payment row lacks identity: nombre."
+msgstr "Falta el nombre en la fila de pago."
+
+#: ec_hr/payroll/payments.py:112
+msgid "Payment row lacks identity: numero_cta."
+msgstr "Falta el número de cuenta en la fila de pago."
+
+#: ec_hr/payroll/payments.py:117
+msgid "Payment row lacks identity: numero_id."
+msgstr "Falta el número de identificación en la fila de pago."
