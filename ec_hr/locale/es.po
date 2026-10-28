@@ -851,3 +851,55 @@ msgstr "Los días trabajados no pueden ser negativos."
 #: ec_hr/payroll/period.py
 msgid "Hire date is after exit date."
 msgstr "La fecha de ingreso es posterior a la fecha de salida."
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "EC Deduction Balance"
+msgstr "Saldo de deducción EC"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Deduction Label"
+msgstr "Etiqueta de deducción"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Deduction Kind"
+msgstr "Tipo de deducción"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Carried Balance"
+msgstr "Saldo arrastrado"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Monthly Amount"
+msgstr "Monto mensual"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Slip Field"
+msgstr "Campo del rol"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Judicial"
+msgstr "Judicial"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Statutory"
+msgstr "De ley"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Voluntary"
+msgstr "Voluntario"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.py
+msgid "Deduction label is required."
+msgstr "La etiqueta de deducción es obligatoria."
+
+#: ec_hr/payroll/deductions.py
+msgid "Unknown balance slip field: {0}."
+msgstr "Campo de rol desconocido para el saldo: {0}."
+
+#: ec_hr/ecuador_hr/custom_fields.py
+msgid "Alimony Carried"
+msgstr "Alimentos arrastrados"
+
+#: ec_hr/ecuador_hr/custom_fields.py
+msgid "Advance Carried"
+msgstr "Anticipo arrastrado"

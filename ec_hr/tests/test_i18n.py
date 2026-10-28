@@ -53,7 +53,9 @@ def _doctype_msgids() -> set[str]:
 				found.add(str(field["label"]))
 			for option in str(field.get("options", "")).split("\n"):
 				text = option.strip()
-				if text and not re.fullmatch(r"[\d.]+", text):
+				# Skip bare numeric codes (169.1, 172...) and ec_ field identifiers:
+				# identifiers by design, never UI strings.
+				if text and not re.fullmatch(r"[\d.]+", text) and not text.startswith("ec_"):
 					found.add(text)
 	found.discard("")
 	return found

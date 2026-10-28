@@ -17,7 +17,9 @@ doc_events = {
 		],
 	},
 	"Salary Slip": {
+		"before_validate": "ec_hr.ecuador_hr.carry_hooks.inject_balances_into_slip",
 		"validate": "ec_hr.ecuador_hr.salary_slip_hooks.validate_salary_slip",
+		"on_submit": "ec_hr.ecuador_hr.carry_hooks.write_back_shortfall",
 	},
 	"Leave Application": {
 		"validate": "ec_hr.ecuador_hr.leave_application_hooks.validate_leave_application",

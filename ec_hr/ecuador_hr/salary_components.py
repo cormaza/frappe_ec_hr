@@ -49,7 +49,7 @@ def get_salary_components() -> list[dict[str, object]]:
 			"salary_component": "EC Alimony Withholding",
 			"type": "Deduction",
 			"amount_based_on_formula": 1,
-			"formula": "ec_alimony_order or 0",
+			"formula": "(ec_alimony_order or 0) + (ec_alimony_carried or 0)",
 		},
 		{
 			"doctype": "Salary Component",
@@ -57,6 +57,6 @@ def get_salary_components() -> list[dict[str, object]]:
 			"salary_component": "EC Salary Advance Deduction",
 			"type": "Deduction",
 			"amount_based_on_formula": 1,
-			"formula": "ec_advance_deduction or 0",
+			"formula": "(ec_advance_deduction or 0) + (ec_advance_carried or 0)",
 		},
 	]

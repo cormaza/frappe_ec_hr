@@ -35,9 +35,9 @@ class TestSalaryComponents(UnitTestCase):
 			"EC Overtime Night 100%": ("2.25", "ec_overtime_night_min"),
 			"EC Extraordinary 100%": ("2.0", "ec_extraordinary_min"),
 			"EC Night Premium 25%": ("0.25", "ec_night_min"),
-			"EC Alimony Withholding": ("ec_alimony_order or 0", "ec_alimony_order"),
+			"EC Alimony Withholding": ("ec_alimony_carried", "ec_alimony_order"),
 			"EC Salary Advance Deduction": (
-				"ec_advance_deduction or 0",
+				"ec_advance_carried",
 				"ec_advance_deduction",
 			),
 		}

@@ -182,9 +182,23 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"fieldtype": "Currency",
 			},
 			{
+				"fieldname": "ec_alimony_carried",
+				"label": "Alimony Carried",
+				"fieldtype": "Currency",
+				"read_only": 1,
+				"description": "Set by the carryforward hook; do not edit.",
+			},
+			{
 				"fieldname": "ec_advance_deduction",
 				"label": "Salary Advance Deduction",
 				"fieldtype": "Currency",
+			},
+			{
+				"fieldname": "ec_advance_carried",
+				"label": "Advance Carried",
+				"fieldtype": "Currency",
+				"read_only": 1,
+				"description": "Set by the carryforward hook; do not edit.",
 			},
 		],
 		"gross_pay",

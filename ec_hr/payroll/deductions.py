@@ -111,3 +111,8 @@ def check_alimony_floor(
 			order_amount, floor_amount
 		)
 	return None
+
+
+def carry_shortfall(owed: float, applied: float) -> float:
+	"""Return the unpaid remainder to carry, floored at zero."""
+	return round(max(owed - applied, 0.0), 2)

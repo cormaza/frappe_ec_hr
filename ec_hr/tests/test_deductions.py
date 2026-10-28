@@ -3,6 +3,7 @@ import unittest
 from ec_hr.payroll.deductions import (
 	amortize,
 	apply_waterfall,
+	carry_shortfall,
 	check_alimony_floor,
 	cona_floor_pct,
 )
@@ -59,6 +60,15 @@ class TestWaterfall(UnitTestCase):
 	def test_unknown_kind_fails_loud(self) -> None:
 		with self.assertRaises(ValueError):
 			apply_waterfall(1000.0, [_deduction("mystery", "x", 10.0)])
+
+
+class TestCarryforward(UnitTestCase):
+	"""Shortfall write-back math (injection is assignment, tested via hooks)."""
+
+	def test_carry_shortfall_floors_at_zero(self) -> None:
+		self.assertEqual(carry_shortfall(400.0, 250.0), 150.0)
+		self.assertEqual(carry_shortfall(400.0, 400.0), 0.0)
+		self.assertEqual(carry_shortfall(400.0, 500.0), 0.0)
 
 
 class TestAmortize(UnitTestCase):
