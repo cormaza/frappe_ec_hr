@@ -12,6 +12,7 @@ observes no daylight saving, so wall-clock arithmetic is exact).
 """
 
 from datetime import datetime, time, timedelta
+from itertools import pairwise
 
 try:
 	from frappe import _
@@ -47,7 +48,7 @@ def split_day_night(start: datetime, end: datetime) -> tuple[int, int]:
 		cursor += timedelta(days=1)
 	ordered = sorted(boundaries)
 	day = night = 0
-	for first, second in zip(ordered, ordered[1:]):
+	for first, second in pairwise(ordered):
 		minutes = int((second - first).total_seconds() // 60)
 		if _is_night(first.time()):
 			night += minutes
@@ -85,9 +86,7 @@ def check_overtime_caps(daily_minutes: list[float], weekly_minutes: float) -> li
 	violations = []
 	for index, minutes in enumerate(daily_minutes, start=1):
 		if minutes > MAX_DAILY_OVERTIME_MIN:
-			violations.append(
-				_("Day {0} exceeds the 4-hour daily overtime cap.").format(index)
-			)
+			violations.append(_("Day {0} exceeds the 4-hour daily overtime cap.").format(index))
 	if weekly_minutes > MAX_WEEKLY_OVERTIME_MIN:
 		violations.append(_("Week exceeds the 12-hour weekly overtime cap."))
 	return violations

@@ -16,4 +16,7 @@ doc_events = {
 	"Salary Slip": {
 		"validate": "ec_hr.ecuador_hr.salary_slip_hooks.validate_salary_slip",
 	},
+	"Leave Application": {
+		"validate": "ec_hr.ecuador_hr.leave_application_hooks.validate_leave_application",
+	},
 }

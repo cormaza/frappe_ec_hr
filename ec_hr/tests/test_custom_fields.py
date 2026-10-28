@@ -28,6 +28,14 @@ class TestCustomFieldsStructure(UnitTestCase):
 		options = str(fields["ec_contract_kind"]["options"]).split("\n")
 		self.assertEqual(sorted(options), sorted(kind.value for kind in ContractKind))
 
+	def test_phase3_election_and_certificate_fields(self) -> None:
+		fields = get_custom_fields()
+		employee = {f["fieldname"] for f in fields["Employee"]}
+		for expected in ("ec_xiii_accumulated", "ec_xiv_accumulated", "ec_xiv_region"):
+			self.assertIn(expected, employee)
+		leave = {f["fieldname"] for f in fields["Leave Application"]}
+		self.assertIn("ec_medical_certificate", leave)
+
 	def test_salary_slip_fields_have_expected_fieldnames(self) -> None:
 		fields = get_custom_fields()["Salary Slip"]
 		self.assertTrue(fields)

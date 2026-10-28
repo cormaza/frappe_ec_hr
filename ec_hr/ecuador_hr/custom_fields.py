@@ -89,6 +89,17 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"label": "Disability Substitute",
 				"fieldtype": "Check",
 			},
+			{
+				"fieldname": "ec_xiii_accumulated",
+				"label": "Accumulate Thirteenth Salary",
+				"fieldtype": "Check",
+			},
+			{
+				"fieldname": "ec_xiv_accumulated",
+				"label": "Accumulate Fourteenth Salary",
+				"fieldtype": "Check",
+			},
+			_select("ec_xiv_region", "Fourteenth Salary Region", ["costa", "sierra"]),
 		],
 		"Salary Slip": [
 			{
@@ -135,6 +146,13 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"fieldname": "ec_advance_deduction",
 				"label": "Salary Advance Deduction",
 				"fieldtype": "Currency",
+			},
+		],
+		"Leave Application": [
+			{
+				"fieldname": "ec_medical_certificate",
+				"label": "Medical Certificate",
+				"fieldtype": "Attach",
 			},
 		],
 	}
