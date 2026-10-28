@@ -1,0 +1,90 @@
+{
+ "actions": [],
+ "autoname": "format:EC-SA-.YYYY.-.####",
+ "creation": "2026-10-28 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "cause",
+  "termination_date",
+  "last_monthly_remuneration",
+  "service_years",
+  "desahucio_amount",
+  "untimely_amount",
+  "sut_filing_reference"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cause",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Termination Cause",
+   "options": "169.1\n169.2\n169.3\n169.4\n169.5\n169.6\n169.7\n169.8\n169.9\n172\n173\nuntimely",
+   "reqd": 1
+  },
+  {
+   "fieldname": "termination_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Termination Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "last_monthly_remuneration",
+   "fieldtype": "Currency",
+   "label": "Last Monthly Remuneration",
+   "reqd": 1
+  },
+  {
+   "fieldname": "service_years",
+   "fieldtype": "Float",
+   "label": "Service Years"
+  },
+  {
+   "fieldname": "desahucio_amount",
+   "fieldtype": "Currency",
+   "label": "Desahucio Bonus",
+   "read_only": 1
+  },
+  {
+   "fieldname": "untimely_amount",
+   "fieldtype": "Currency",
+   "label": "Untimely Dismissal Award",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sut_filing_reference",
+   "fieldtype": "Data",
+   "label": "SUT Filing Reference"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-10-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ecuador HR",
+ "name": "EC Settlement Act",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "HR Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
