@@ -7,3 +7,10 @@ app_license = "MIT"
 required_apps = ["frappe", "erpnext", "hrms"]
 
 fixtures = []
+
+after_install = "ec_hr.ecuador_hr.setup.after_install"
+doc_events = {
+	"Employee": {
+		"validate": "ec_hr.ecuador_hr.employee_hooks.validate_employee",
+	},
+}
