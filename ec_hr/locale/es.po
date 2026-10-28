@@ -743,3 +743,47 @@ msgstr "Salary Structure"
 #: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
 msgid "untimely"
 msgstr "untimely"
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch amount cannot be negative."
+msgstr "El monto del batch no puede ser negativo."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch cedula must be exactly 10 digits."
+msgstr "La cédula del batch debe tener exactamente 10 dígitos."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch date must be YYYYMMDD: {0}."
+msgstr "La fecha del batch debe ser AAAAMMDD: {0}."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch field {0} must be a single character."
+msgstr "El campo {0} del batch debe ser un solo carácter."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch month must fall within 1-12."
+msgstr "El mes del batch debe estar entre 1 y 12."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch position exceeds 64 characters."
+msgstr "El cargo del batch excede 64 caracteres."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch relation must be 2 characters."
+msgstr "La relación de trabajo del batch debe tener 2 caracteres."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch sector must be exactly 13 digits."
+msgstr "El sector del batch debe tener exactamente 13 dígitos."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Branch code must be exactly 4 digits."
+msgstr "El código de sucursal debe tener exactamente 4 dígitos."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Reserve period must read 'YYYY-MM A YYYY-MM' (17 chars)."
+msgstr "El período de reserva debe ser 'AAAA-MM A AAAA-MM' (17 caracteres)."
+
+#: ec_hr/payroll/rdep.py
+msgid "Unsupported RDEP schema pinned: {0}. Only 2023 is pinned."
+msgstr "Esquema RDEP no soportado: {0}. Solo 2023 está fijado."

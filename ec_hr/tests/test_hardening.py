@@ -15,7 +15,7 @@ APP_ROOT = Path(__file__).resolve().parent.parent
 
 #: Statutory provenance markers (or the explicit operational disclaimer).
 SOURCE_RE = re.compile(
-	r"Art\.|Codigo|Ley |LSS|Mandato|COPCI|LOD|SRI|CONA|IESS|BIESS|R\.O\.|no statutory formula"
+	r"Art\.|Codigo|Ley |LSS|MDT|SUT|Mandato|COPCI|LOD|SRI|CONA|IESS|BIESS|R\.O\.|no statutory formula"
 )
 
 

@@ -205,8 +205,11 @@ def rdep_xml(
 	*,
 	tipo_empleador: str | None = None,
 	ente_seg_social: str | None = None,
+	schema: str = "2023",
 ) -> str:
 	"""Build the RDEP annex XML document (element order per the XSD)."""
+	if schema != "2023":
+		raise ValueError(_("Unsupported RDEP schema pinned: {0}. Only 2023 is pinned.").format(schema))
 	if len(num_ruc) != 13 or not num_ruc.isdigit():
 		raise ValueError(_("Employer RUC must be exactly 13 digits."))
 	if anio < 2004:
