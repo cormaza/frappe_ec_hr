@@ -100,6 +100,16 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"fieldtype": "Check",
 			},
 			_select("ec_xiv_region", "Fourteenth Salary Region", ["costa", "sierra"]),
+			{
+				"fieldname": "ec_entry_notice_date",
+				"label": "IESS Entry Notice Date",
+				"fieldtype": "Date",
+			},
+			{
+				"fieldname": "ec_exit_notice_date",
+				"label": "IESS Exit Notice Date",
+				"fieldtype": "Date",
+			},
 		],
 		"Salary Slip": [
 			{

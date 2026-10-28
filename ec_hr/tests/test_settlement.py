@@ -4,6 +4,7 @@ from pathlib import Path
 
 try:
 	import frappe
+
 	_RING_ERRORS = (ValueError, frappe.ValidationError)
 except ImportError:  # pragma: no cover - Ring 1 has no frappe package.
 	frappe = None  # type: ignore[assignment]
