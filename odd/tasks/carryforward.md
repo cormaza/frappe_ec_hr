@@ -38,3 +38,4 @@ consumer. v1: EC Deduction Balance ledger + `before_validate` injection into
   not survive save recalculation — seed formula changes need structure
   refresh, open question below.
 - L3: CLOSED — `ensure_salary_components()` in `ecuador_hr/setup.py` already refreshes formula + amount_based_on_formula on existing rows (never user amounts), so seed formula changes propagate via migrate/install without manual refresh.
+- L4 (walkthrough UX): U-001 `slip_field` shows raw field names (hook contract, must stay) → description added; U-002 optional `salary_component` silently disables carry → description added; permissions (HR Manager only) match sibling DocTypes, no change; bench 290 + 2 green after migrate (one self-caused red: markers synced without es.po, fixed by syncing es.po).
