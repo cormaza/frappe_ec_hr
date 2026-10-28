@@ -39,12 +39,14 @@
   {
    "fieldname": "balance",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Carried Balance",
    "reqd": 1
   },
   {
    "fieldname": "monthly_amount",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Monthly Amount",
    "reqd": 1
   },
