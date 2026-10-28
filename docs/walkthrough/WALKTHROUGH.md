@@ -61,6 +61,29 @@ result; every finding was fixed inline and is recorded below with its fix.
 - EC HR Settings Single saves the SBU table; `get_sbu(2025)` → 470.0
   (`15-settings-saved.png`).
 
+## W5 — Deduction carryforward ledger
+
+- Subject: Maria Lopez (HR-EMP-00002, Active, joined 2026-10-05), Nov 2026
+  slip. Preconditions per standard hrms: submitted Salary Structure
+  Assignment (EC Test Structure-1) plus a submitted Holiday List Assignment
+  (HR-HLA-2026-00002 → EC Test Holidays 2026). Nov was the free period:
+  Juan's Oct/Nov/Dec 2026 slips were already submitted by the earlier
+  mechanics pass (recorded in `odd/tasks/carryforward.md` L2).
+- Ledger entry: Walkthrough Alimony, Judicial, carried 0.00, monthly
+  400.00, component EC Alimony Withholding, slip field `ec_alimony_order`
+  (`16-carry-balance-form.png`, showing the U-001/U-002 descriptions).
+- Slip `Sal Slip/HR-EMP-00002/00001` on save: `before_validate` injected
+  `ec_alimony_carried = 400.00`; deduction row EC Alimony Withholding
+  400.00; Basic 1000 → gross 1000, total deduction 400, net 600
+  (`17-carry-slip-submitted.png`, Earnings & Deductions tab).
+- On submit: `on_submit` wrote back `max(400 − 400, 0) = 0`; the ledger
+  list shows Carried Balance $0.00 against Monthly Amount $400.00
+  (`18-carry-balance-list.png`).
+- Partial path (250 owed, 100 applied → 150 carried) stays covered by the
+  bench mechanics evidence in `odd/tasks/carryforward.md` L2; forcing a
+  partial through the Desk UI is not possible (hrms applies formula rows
+  in full and guards negative net instead).
+
 ## Findings fixed during the pass
 
 - **F-001 field order.** EC fields rendered above standard Employee fields.
@@ -90,6 +113,16 @@ result; every finding was fixed inline and is recorded below with its fix.
   (Frappe validates against the new list before our hook runs): existing
   docs were remapped (`indefinite` → `Indefinite`) and the rollout note is:
   option renames always ship a data patch.
+- **F-008 unexplained tracking fields.** `salary_component` (silent
+  no-carry when blank) and `slip_field` (raw `ec_*` field names, a hook
+  contract that must stay) had no help text. Fixed: descriptions on both,
+  with markers + `es.po` entries (`test_markers_covered` caught a partial
+  sync mid-pass — markers without `es.po` — so both files now sync
+  together).
+- **F-009 amount-blind ledger list.** The balance list showed only
+  ID/Employee/Label/Kind — no amounts on a ledger whose whole point is
+  amounts. Fixed: `in_list_view` on Carried Balance and Monthly Amount
+  (`18-carry-balance-list.png` proves the columns).
 - **Accepted as-is.** EC-prefixed component names truncate in narrow grid
   columns (namespace clarity in shared lists wins over renaming seeded
   records); the workspace has no Desk-home icon (standard).
