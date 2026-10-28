@@ -11,7 +11,6 @@ with a floor at zero.
 import calendar
 from datetime import date
 
-
 #: IESS contribution month base, in days.
 MONTH_BASE_DAYS = 30
 
@@ -62,6 +61,7 @@ def worked_fraction(
 	absence_days: int = 0,
 ) -> float:
 	"""Return the worked fraction of the 30-day month (0.0-1.0)."""
-	return iess_billable_days(
-		year, month, hire_date=hire_date, exit_date=exit_date, absence_days=absence_days
-	) / MONTH_BASE_DAYS
+	return (
+		iess_billable_days(year, month, hire_date=hire_date, exit_date=exit_date, absence_days=absence_days)
+		/ MONTH_BASE_DAYS
+	)

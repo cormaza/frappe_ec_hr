@@ -26,9 +26,7 @@ def apply_waterfall(
 	"""Apply deductions by priority; return applied, net, and shortfall."""
 	for deduction in deductions:
 		if deduction.get("kind") not in _PRIORITY:
-			raise ValueError(
-				_("Unknown deduction kind: {0}.").format(deduction.get("kind"))
-			)
+			raise ValueError(_("Unknown deduction kind: {0}.").format(deduction.get("kind")))
 	ordered = sorted(deductions, key=lambda item: _PRIORITY[str(item["kind"])])
 	applied: dict[str, float] = {}
 	shortfall: dict[str, float] = {}
@@ -62,7 +60,9 @@ def amortize(principal: float, *, monthly_rate: float = 0.0, months: int) -> lis
 		interest = round(balance * monthly_rate, 2)
 		capital = round(installment - interest, 2)
 		balance = round(balance - capital, 2)
-		schedule.append({"installment": installment, "interest": interest, "capital": capital, "balance": balance})
+		schedule.append(
+			{"installment": installment, "interest": interest, "capital": capital, "balance": balance}
+		)
 	schedule[-1]["capital"] = round(schedule[-1]["capital"] + schedule[-1]["balance"], 2)
 	schedule[-1]["installment"] = round(schedule[-1]["capital"] + schedule[-1]["interest"], 2)
 	schedule[-1]["balance"] = 0.0
