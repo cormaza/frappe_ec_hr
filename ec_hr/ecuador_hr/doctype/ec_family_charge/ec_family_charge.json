@@ -16,7 +16,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Relation",
-   "options": "spouse\npartner\nchild\nchild_with_disability",
+   "options": "Spouse\nPartner\nChild\nChild With Disability",
    "reqd": 1
   },
   {

@@ -52,3 +52,11 @@ class TestNoticeWarnings(UnitTestCase):
 	def test_validate_never_raises(self) -> None:
 		validate_employee_notices(_doc(date_of_joining=date(2026, 9, 1)))
 		validate_employee_notices(_doc())
+
+	def test_string_dates_behave(self) -> None:
+		# Fresh docs carry ISO strings; warnings compute the same.
+		doc = _doc(date_of_joining="2026-09-01", ec_entry_notice_date="2026-10-01")
+		warning = entry_warning(doc, AS_OF)
+		self.assertIsNotNone(warning)
+		self.assertIn("15", str(warning))
+		validate_employee_notices(doc)

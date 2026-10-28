@@ -59,6 +59,7 @@ class TestValidateEmployeePure(UnitTestCase):
 
 	def test_known_contract_kind_passes(self) -> None:
 		validate_employee(_doc(ec_contract_kind="indefinite"))
+		validate_employee(_doc(ec_contract_kind="Eventual"))
 
 	def test_disability_pct_out_of_range_fails(self) -> None:
 		with self.assertRaises(_RING_ERRORS):
@@ -67,6 +68,12 @@ class TestValidateEmployeePure(UnitTestCase):
 	def test_under_15_birthdate_fails(self) -> None:
 		with self.assertRaises(_RING_ERRORS):
 			validate_employee(_doc(date_of_birth=date(2015, 1, 1)))
+
+	def test_string_birthdate_behaves(self) -> None:
+		# Fresh docs carry ISO strings; the hook normalizes before comparing.
+		with self.assertRaises(_RING_ERRORS):
+			validate_employee(_doc(date_of_birth="2015-01-01"))
+		validate_employee(_doc(date_of_birth="1990-06-15"))
 
 	def test_adult_birthdate_passes(self) -> None:
 		validate_employee(_doc(date_of_birth=date(1990, 6, 15)))

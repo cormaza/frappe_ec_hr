@@ -25,19 +25,20 @@ class TestSalaryComponents(UnitTestCase):
 				self.assertEqual(component["doctype"], "Salary Component")
 				self.assertTrue(component["salary_component"])
 				self.assertTrue(component["formula"])
+				self.assertEqual(component["amount_based_on_formula"], 1)
 
 	def test_formulas_pin_sandbox_safe_factors(self) -> None:
-		# hrms evaluates formulas in a sandbox without our modules in scope,
-		# so earning formulas mirror overtime.py factors as plain arithmetic.
+		# hrms evaluates formulas against bare slip-field names (no `doc`
+		# prefix exists in the eval namespace); factors mirror overtime.py.
 		expected = {
-			"EC Overtime Daytime 50%": ("1.5", "doc.ec_overtime_day_min"),
-			"EC Overtime Night 100%": ("2.25", "doc.ec_overtime_night_min"),
-			"EC Extraordinary 100%": ("2.0", "doc.ec_extraordinary_min"),
-			"EC Night Premium 25%": ("0.25", "doc.ec_night_min"),
-			"EC Alimony Withholding": ("doc.ec_alimony_order or 0", "doc.ec_alimony_order"),
+			"EC Overtime Daytime 50%": ("1.5", "ec_overtime_day_min"),
+			"EC Overtime Night 100%": ("2.25", "ec_overtime_night_min"),
+			"EC Extraordinary 100%": ("2.0", "ec_extraordinary_min"),
+			"EC Night Premium 25%": ("0.25", "ec_night_min"),
+			"EC Alimony Withholding": ("ec_alimony_order or 0", "ec_alimony_order"),
 			"EC Salary Advance Deduction": (
-				"doc.ec_advance_deduction or 0",
-				"doc.ec_advance_deduction",
+				"ec_advance_deduction or 0",
+				"ec_advance_deduction",
 			),
 		}
 		formulas = {c["name"]: str(c["formula"]) for c in get_salary_components()}
@@ -46,3 +47,4 @@ class TestSalaryComponents(UnitTestCase):
 			with self.subTest(component=name):
 				self.assertIn(factor, formulas[name])
 				self.assertIn(field, formulas[name])
+				self.assertNotIn("doc.", formulas[name])

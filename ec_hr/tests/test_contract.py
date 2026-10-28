@@ -6,6 +6,7 @@ from ec_hr.payroll.contract import (
 	ContractKind,
 	ends_with_desahucio_bonus,
 	is_provisional,
+	parse_contract_kind,
 	probation_end_date,
 	requires_visto_bueno,
 )
@@ -46,6 +47,13 @@ class TestContractKinds(UnitTestCase):
 	def test_special_emergent_is_provisional(self) -> None:
 		self.assertTrue(is_provisional(ContractKind.SPECIAL_EMERGENT))
 		self.assertFalse(is_provisional(ContractKind.INDEFINITE))
+
+	def test_parse_normalizes_display_values(self) -> None:
+		self.assertEqual(parse_contract_kind("Eventual"), ContractKind.EVENTUAL)
+		self.assertEqual(parse_contract_kind("Obra Cierta"), ContractKind.OBRA_CIERTA)
+		self.assertEqual(parse_contract_kind("indefinite"), ContractKind.INDEFINITE)
+		with self.assertRaises(ValueError):
+			parse_contract_kind("Hourly")
 
 
 class TestTerminationConsequences(UnitTestCase):

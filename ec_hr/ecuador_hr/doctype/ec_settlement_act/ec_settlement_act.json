@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "format:EC-SA-.YYYY.-.####",
+ "autoname": "format:EC-SA-{YYYY}-{####}",
  "creation": "2026-10-28 00:00:00.000000",
  "doctype": "DocType",
  "engine": "InnoDB",

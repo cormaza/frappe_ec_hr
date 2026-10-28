@@ -29,11 +29,18 @@ def _as_date(value: Any) -> Any:
 	return value
 
 
+def _normalize_relation(value: Any) -> Any:
+	# Display values are Title Case; the Art. 97 set stays lowercase.
+	if isinstance(value, str):
+		return value.strip().lower().replace(" ", "_")
+	return value
+
+
 class ECFamilyCharge(Document):
 	def validate(self) -> None:
 		reason = charge_rejection_reason(
 			{
-				"relation": self.relation,  # type: ignore[attr-defined]
+				"relation": _normalize_relation(self.relation),  # type: ignore[attr-defined]
 				"birthdate": _as_date(self.birthdate),  # type: ignore[attr-defined]
 				"disability_pct": float(self.disability_pct or 0.0),  # type: ignore[attr-defined]
 				"accredited_on": _as_date(self.accredited_on),  # type: ignore[attr-defined]

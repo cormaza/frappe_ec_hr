@@ -20,7 +20,7 @@ except ImportError:  # pragma: no cover - Ring 1 has no frappe package.
 
 
 from ec_hr.payroll.age import YouthCategory, youth_category
-from ec_hr.payroll.contract import ContractKind
+from ec_hr.payroll.contract import parse_contract_kind
 from ec_hr.payroll.identity import IdKind, is_valid_ci, is_valid_ruc
 
 _ID_TYPE_KIND = {
@@ -30,6 +30,13 @@ _ID_TYPE_KIND = {
 	"RUC Public": IdKind.RUC_PUBLIC,
 	"Passport": None,
 }
+
+
+def _as_date(value: Any) -> Any:
+	# Fresh docs carry dates as ISO strings; normalize before comparing.
+	if isinstance(value, str):
+		return date.fromisoformat(value)
+	return value
 
 
 def _fail(message: str) -> None:
@@ -44,7 +51,7 @@ def _warn(message: str) -> None:
 	frappe.msgprint(message, alert=True)
 
 
-def validate_employee(doc: Any) -> None:
+def validate_employee(doc: Any, *_args: Any) -> None:
 	"""Validate Ecuadorian fields on an Employee document (doc_events hook)."""
 	id_type = getattr(doc, "ec_id_type", None)
 	id_number = (getattr(doc, "ec_id_number", None) or "").strip()
@@ -54,7 +61,7 @@ def validate_employee(doc: Any) -> None:
 			doc.ec_id_validated = 1
 		elif expected == IdKind.CI:
 			if not is_valid_ci(id_number):
-				_fail(_("Ecuadorian ID Number is not a valid cedula for {0}.").format(id_type))
+				_fail(_("Ecuadorian ID Number is not a valid {0} number.").format(id_type))
 			doc.ec_id_validated = 1
 		elif expected in (IdKind.RUC_NATURAL, IdKind.RUC_PRIVATE, IdKind.RUC_PUBLIC):
 			if not is_valid_ruc(id_number):
@@ -70,14 +77,14 @@ def validate_employee(doc: Any) -> None:
 	contract_kind = getattr(doc, "ec_contract_kind", None)
 	if contract_kind:
 		try:
-			ContractKind(contract_kind)
-		except ValueError:
-			_fail(_("Unknown Ecuadorian Contract Kind: {0}.").format(contract_kind))
+			parse_contract_kind(contract_kind)
+		except ValueError as exc:
+			_fail(str(exc))
 
 	disability_pct = float(getattr(doc, "ec_disability_pct", 0.0) or 0.0)
 	if not 0.0 <= disability_pct <= 100.0:
 		_fail(_("Disability Percentage must be between 0 and 100."))
 
-	birthdate = getattr(doc, "date_of_birth", None)
+	birthdate = _as_date(getattr(doc, "date_of_birth", None))
 	if birthdate and youth_category(birthdate, date.today()) == YouthCategory.UNDER_15:
 		_fail(_("Employees under 15 cannot be hired (Codigo del Trabajo Art. 134)."))

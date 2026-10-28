@@ -21,6 +21,13 @@ except ImportError:  # pragma: no cover - Ring 1 has no frappe package.
 from ec_hr.payroll.iess import notice_deadlines, overdue_days
 
 
+def _as_date(value: Any) -> Any:
+	# Fresh docs carry dates as ISO strings; normalize before comparing.
+	if isinstance(value, str):
+		return date.fromisoformat(value)
+	return value
+
+
 def _warn(message: str) -> None:
 	if frappe is None:
 		return
@@ -29,12 +36,12 @@ def _warn(message: str) -> None:
 
 def entry_warning(doc: Any, as_of: date) -> str | None:
 	"""Warn when the entry notice is late or missing past its deadline."""
-	hire = getattr(doc, "date_of_joining", None)
+	hire = _as_date(getattr(doc, "date_of_joining", None))
 	if hire is None:
 		return None
 	deadline = notice_deadlines(hire, None)["entry_by"]
 	assert isinstance(deadline, date)
-	noticed = getattr(doc, "ec_entry_notice_date", None)
+	noticed = _as_date(getattr(doc, "ec_entry_notice_date", None))
 	late_by = overdue_days(deadline, noticed or as_of)
 	if late_by:
 		return _("IESS entry notice is {0} days late.").format(late_by)
@@ -43,21 +50,22 @@ def entry_warning(doc: Any, as_of: date) -> str | None:
 
 def exit_warning(doc: Any, as_of: date) -> str | None:
 	"""Warn when the exit notice is late or missing past its deadline."""
-	exit_date = getattr(doc, "relieving_date", None)
+	exit_date = _as_date(getattr(doc, "relieving_date", None))
 	if exit_date is None:
 		return None
 	deadline = notice_deadlines(exit_date, exit_date)["exit_by"]
 	assert isinstance(deadline, date)
-	noticed = getattr(doc, "ec_exit_notice_date", None)
+	noticed = _as_date(getattr(doc, "ec_exit_notice_date", None))
 	late_by = overdue_days(deadline, noticed or as_of)
 	if late_by:
 		return _("IESS exit notice is {0} days late.").format(late_by)
 	return None
 
 
-def validate_employee_notices(doc: Any, as_of: date | None = None) -> None:
+def validate_employee_notices(doc: Any, *_args: Any) -> None:
 	"""Warn on overdue IESS notices; never blocks (doc_events hook)."""
-	today = as_of or date.today()
+	# Frappe passes the method name as a second positional arg; only today counts.
+	today = date.today()
 	for warning in (entry_warning(doc, today), exit_warning(doc, today)):
 		if warning is not None:
 			_warn(warning)

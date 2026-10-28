@@ -1,5 +1,6 @@
 import json
 import unittest
+from itertools import pairwise
 from pathlib import Path
 
 from ec_hr.ecuador_hr.custom_fields import get_custom_fields
@@ -25,8 +26,32 @@ class TestCustomFieldsStructure(UnitTestCase):
 
 	def test_contract_kind_options_match_enum(self) -> None:
 		fields = {f["fieldname"]: f for f in get_custom_fields()["Employee"]}
-		options = str(fields["ec_contract_kind"]["options"]).split("\n")
-		self.assertEqual(sorted(options), sorted(kind.value for kind in ContractKind))
+		options = [o for o in str(fields["ec_contract_kind"]["options"]).split("\n") if o]
+		expected = [kind.value.replace("_", " ").title() for kind in ContractKind]
+		self.assertEqual(sorted(options), sorted(expected))
+
+	def test_selects_start_blank_and_sections_chain(self) -> None:
+		fields = get_custom_fields()
+		for doctype, first_anchor in (
+			("Employee", "create_user_automatically"),
+			("Salary Slip", "gross_pay"),
+			("Leave Application", "sb_other_details"),
+		):
+			chain = fields[doctype]
+			self.assertEqual(chain[0]["insert_after"], first_anchor)
+			for previous, field in pairwise(chain):
+				with self.subTest(doctype=doctype, field=field.get("fieldname")):
+					self.assertEqual(field["insert_after"], previous["fieldname"])
+		for field in fields["Employee"] + fields["Salary Slip"]:
+			if field["fieldtype"] == "Select":
+				with self.subTest(field=field.get("fieldname")):
+					self.assertTrue(str(field["options"]).startswith("\n"))
+		sections = [
+			f for f in fields["Employee"] + fields["Salary Slip"] if f["fieldtype"] == "Section Break"
+		]
+		self.assertEqual(
+			{str(f["label"]) for f in sections}, {"Ecuadorian Details", "Ecuadorian Payroll Inputs"}
+		)
 
 	def test_phase3_election_and_certificate_fields(self) -> None:
 		fields = get_custom_fields()

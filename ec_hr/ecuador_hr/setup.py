@@ -12,6 +12,16 @@ def ensure_salary_components() -> None:
 		name = spec.get("name")
 		if not frappe.db.exists("Salary Component", name):
 			frappe.get_doc(spec).insert()
+			continue
+		# Seed definitions own the formula contract: refresh it on existing
+		# rows so app updates propagate (never touch user-edited amounts).
+		component = frappe.get_doc("Salary Component", name)
+		if component.formula != spec.get("formula") or component.amount_based_on_formula != spec.get(
+			"amount_based_on_formula"
+		):
+			component.formula = spec.get("formula")
+			component.amount_based_on_formula = spec.get("amount_based_on_formula")
+			component.save()
 
 
 def after_install() -> None:

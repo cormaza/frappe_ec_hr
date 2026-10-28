@@ -51,6 +51,14 @@ def is_provisional(kind: ContractKind) -> bool:
 	return kind in _PROVISIONAL
 
 
+def parse_contract_kind(value: str) -> ContractKind:
+	"""Normalize a displayed (Title Case) kind to its identifier."""
+	try:
+		return ContractKind(value.strip().lower().replace(" ", "_"))
+	except ValueError:
+		raise ValueError(_("Unknown Ecuadorian Contract Kind: {0}.").format(value)) from None
+
+
 def _check_known(cause: str) -> None:
 	if cause not in _ALL_169 and cause not in _VISTO_BUENO_CAUSES:
 		raise ValueError(_("Unknown termination cause: {0}.").format(cause))

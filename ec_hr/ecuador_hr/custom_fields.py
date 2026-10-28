@@ -2,30 +2,48 @@
 
 Returned in `create_custom_fields` format: `{doctype: [field, ...]}`. Labels
 stay raw English (translated at display time; markers live in
-`ec_hr/locale/i18n_markers.py`). No `insert_after` anchors: hrms core
-fieldnames are pinned in bench, and a wrong anchor breaks install — order is
-refined there, never assumed here.
+`ec_hr/locale/i18n_markers.py`). Fields chain through `insert_after` inside
+dedicated EC sections anchored on stable core fieldnames (verified against
+the installed erpnext/hrms JSON in bench); Selects start with a blank option
+so new docs never silently default to the first value.
 """
 
 from ec_hr.payroll.contract import ContractKind
 
 
 def _select(fieldname: str, label: str, options: list[str]) -> dict[str, object]:
+	# Display values are Title Case for HR readability; stored values stay
+	# lowercase identifiers (see payroll.contract.parse_contract_kind).
+	display = [option.replace("_", " ").title() for option in options]
 	return {
 		"fieldname": fieldname,
 		"label": label,
 		"fieldtype": "Select",
-		"options": "\n".join(options),
+		"options": "\n" + "\n".join(display),
 		"reqd": 0,
 	}
+
+
+def _section(fieldname: str, label: str) -> dict[str, object]:
+	return {"fieldname": fieldname, "label": label, "fieldtype": "Section Break"}
+
+
+def _chain(fields: list[dict[str, object]], first_anchor: str) -> list[dict[str, object]]:
+	"""Chain `insert_after` so every field lands inside its EC section."""
+	previous = first_anchor
+	for field in fields:
+		field["insert_after"] = previous
+		previous = str(field["fieldname"])
+	return fields
 
 
 def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 	"""Return Ecuadorian custom fields keyed by target DocType."""
 	id_types = ["Cedula", "RUC Natural", "RUC Private", "RUC Public", "Passport"]
 	contract_kinds = [kind.value for kind in ContractKind]
-	return {
-		"Employee": [
+	employee = _chain(
+		[
+			_section("ec_details_section", "Ecuadorian Details"),
 			_select("ec_id_type", "Ecuadorian ID Type", id_types),
 			{
 				"fieldname": "ec_id_number",
@@ -38,6 +56,7 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"label": "Ecuadorian ID Validated",
 				"fieldtype": "Check",
 				"read_only": 1,
+				"description": "Checksum result — review the ID number when unchecked.",
 			},
 			{
 				"fieldname": "ec_nationality",
@@ -90,6 +109,12 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"fieldtype": "Check",
 			},
 			{
+				"fieldname": "ec_family_charges",
+				"label": "Family Charges",
+				"fieldtype": "Table",
+				"options": "EC Family Charge",
+			},
+			{
 				"fieldname": "ec_xiii_accumulated",
 				"label": "Accumulate Thirteenth Salary",
 				"fieldtype": "Check",
@@ -111,7 +136,11 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"fieldtype": "Date",
 			},
 		],
-		"Salary Slip": [
+		"create_user_automatically",
+	)
+	slip = _chain(
+		[
+			_section("ec_pay_section", "Ecuadorian Payroll Inputs"),
 			{
 				"fieldname": "ec_hourly_rate",
 				"label": "Hourly Rate",
@@ -158,11 +187,16 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"fieldtype": "Currency",
 			},
 		],
-		"Leave Application": [
+		"gross_pay",
+	)
+	leave = _chain(
+		[
 			{
 				"fieldname": "ec_medical_certificate",
 				"label": "Medical Certificate",
 				"fieldtype": "Attach",
 			},
 		],
-	}
+		"sb_other_details",
+	)
+	return {"Employee": employee, "Salary Slip": slip, "Leave Application": leave}

@@ -264,59 +264,59 @@ msgid "Year"
 msgstr "Año"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "apprenticeship"
+msgid "Apprenticeship"
 msgstr "aprendizaje"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "child"
+msgid "Child"
 msgstr "hijo"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "child_with_disability"
+msgid "Child With Disability"
 msgstr "hijo con discapacidad"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "costa"
+msgid "Costa"
 msgstr "Costa"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "eventual"
+msgid "Eventual"
 msgstr "eventual"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "indefinite"
+msgid "Indefinite"
 msgstr "indefinido"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "obra_cierta"
+msgid "Obra Cierta"
 msgstr "obra cierta"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "occasional"
+msgid "Occasional"
 msgstr "ocasional"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "partner"
+msgid "Partner"
 msgstr "conviviente"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "part_time"
+msgid "Part Time"
 msgstr "jornada parcial"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "seasonal"
+msgid "Seasonal"
 msgstr "temporada"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "sierra"
+msgid "Sierra"
 msgstr "Sierra"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "special_emergent"
+msgid "Special Emergent"
 msgstr "emergente especial"
 
 #: ec_hr/locale/i18n_markers.py
-msgid "spouse"
+msgid "Spouse"
 msgstr "cónyuge"
 
 #: ec_hr/payroll/deductions.py
@@ -384,8 +384,8 @@ msgid "Ecuadorian ID Number checksum is invalid; flagged for review."
 msgstr "El número de identificación es inválido; marcado para revisión."
 
 #: ec_hr/ecuador_hr/employee_hooks.py
-msgid "Ecuadorian ID Number is not a valid cedula for {0}."
-msgstr "El número de identificación no es una cédula válida para {0}."
+msgid "Ecuadorian ID Number is not a valid {0} number."
+msgstr "El número de identificación no es un número válido de {0}."
 
 #: ec_hr/ecuador_hr/employee_hooks.py
 msgid "Ecuadorian ID Type is required with Ecuadorian ID Number."
@@ -787,3 +787,19 @@ msgstr "El período de reserva debe ser 'AAAA-MM A AAAA-MM' (17 caracteres)."
 #: ec_hr/payroll/rdep.py
 msgid "Unsupported RDEP schema pinned: {0}. Only 2023 is pinned."
 msgstr "Esquema RDEP no soportado: {0}. Solo 2023 está fijado."
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Ecuadorian Details"
+msgstr "Datos ecuatorianos"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Ecuadorian Payroll Inputs"
+msgstr "Datos de nómina ecuatorianos"
+
+#: ec_hr/ecuador_hr/custom_fields.py
+msgid "Checksum result — review the ID number when unchecked."
+msgstr "Resultado de validación — revise el número si no está marcado."
+
+#: ec_hr/ecuador_hr/custom_fields.py
+msgid "Family Charges"
+msgstr "Cargas familiares"
