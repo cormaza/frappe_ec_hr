@@ -1,7 +1,7 @@
 """Provisioning double-entry stubs (pure Python, no frappe).
 
-Maps provision concepts to expense/liability account pairs supplied by the
-caller: charts of accounts vary per company, so no account code lives here.
+Operational module with no statutory formula claimed: charts of accounts
+vary per company, so account pairs arrive as an explicit caller map.
 Missing mappings fail loud naming the concept.
 """
 

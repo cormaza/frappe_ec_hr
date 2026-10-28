@@ -1,4 +1,5 @@
 import unittest
+from typing import ClassVar
 
 from ec_hr.payroll.accounting import provision_lines
 from ec_hr.payroll.payments import matches_layout, register_layout, render_csv, validate_row
@@ -74,7 +75,9 @@ class TestProvisionLines(UnitTestCase):
 	"""Double-entry provision stubs: the chart of accounts always arrives as
 	an explicit map (it varies per company)."""
 
-	ACCOUNT_MAP = {"thirteenth": {"expense": "5101", "liability": "2110"}}
+	ACCOUNT_MAP: ClassVar[dict[str, dict[str, str]]] = {
+		"thirteenth": {"expense": "5101", "liability": "2110"}
+	}
 
 	def test_lines_balance(self) -> None:
 		lines = provision_lines([{"concept": "thirteenth", "amount": 100.0}], self.ACCOUNT_MAP)

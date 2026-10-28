@@ -1,8 +1,8 @@
 """Bank payment layouts (pure Python, no frappe).
 
-Layouts are caller-provided column specs registered by name: no bank column
-Invention lives here — real Pichincha/Bolivariano/etc. specs pin in bench
-against each bank's manual. Rows validate an identity plus a positive amount
+Operational module: bank column specs pin in bench against each bank's
+manual (no statutory formula claimed). Layouts are caller-provided column
+specs registered by name. Rows validate an identity plus a positive amount
 before rendering.
 """
 
