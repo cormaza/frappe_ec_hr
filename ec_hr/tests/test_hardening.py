@@ -14,7 +14,9 @@ except ImportError:  # pragma: no cover
 APP_ROOT = Path(__file__).resolve().parent.parent
 
 #: Statutory provenance markers (or the explicit operational disclaimer).
-SOURCE_RE = re.compile(r"Art\.|Codigo|Ley |LSS|Mandato|COPCI|LOD|SRI|CONA|IESS|BIESS|R\.O\.|no statutory formula")
+SOURCE_RE = re.compile(
+	r"Art\.|Codigo|Ley |LSS|Mandato|COPCI|LOD|SRI|CONA|IESS|BIESS|R\.O\.|no statutory formula"
+)
 
 
 class TestModuleProvenance(UnitTestCase):
@@ -39,7 +41,7 @@ class TestHooksWiring(UnitTestCase):
 		for _doctype, handlers in ec_hr.hooks.doc_events.items():
 			paths = [handlers] if isinstance(handlers, str) else list(handlers.values())
 			for dotted in paths:
-				for item in (dotted if isinstance(dotted, list) else [dotted]):
+				for item in dotted if isinstance(dotted, list) else [dotted]:
 					with self.subTest(handler=item):
 						module_name, _, func = item.rpartition(".")
 						module = importlib.import_module(module_name)

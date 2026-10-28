@@ -4,6 +4,7 @@ from pathlib import Path
 
 try:
 	import frappe
+
 	_RING_ERRORS = (ValueError, frappe.ValidationError)
 except ImportError:  # pragma: no cover - Ring 1 has no frappe package.
 	frappe = None  # type: ignore[assignment]
@@ -71,7 +72,9 @@ class TestSettingsJson(UnitTestCase):
 
 
 def _settings(rows):  # type: ignore[no-untyped-def]
-	doc = ECHRSettings()
+	# __new__ bypasses Document.__init__ so one path serves both rings (see
+	# test_settlement._act for why).
+	doc = ECHRSettings.__new__(ECHRSettings)
 	doc.sbu_rates = rows  # type: ignore[attr-defined]
 	return doc
 

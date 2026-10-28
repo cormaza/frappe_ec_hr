@@ -48,7 +48,9 @@ class TestSettlementActJson(UnitTestCase):
 
 
 def _act(**overrides):  # type: ignore[no-untyped-def]
-	act = ECSettlementAct()
+	# __new__ bypasses Document.__init__ so one path serves both rings (the
+	# real base requires doctype at construction; the Ring-1 stub takes none).
+	act = ECSettlementAct.__new__(ECSettlementAct)
 	vars(act).update(
 		{
 			"cause": "169.2",
