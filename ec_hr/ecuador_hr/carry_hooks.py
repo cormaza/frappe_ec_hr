@@ -50,13 +50,9 @@ def apply_injection(doc: Any, balances: list[dict[str, Any]]) -> None:
 		setattr(doc, _CARRIED_FIELD[field], owed)
 
 
-def compute_writebacks(
-	balances: list[dict[str, Any]], rows: list[dict[str, Any]]
-) -> dict[str, float]:
+def compute_writebacks(balances: list[dict[str, Any]], rows: list[dict[str, Any]]) -> dict[str, float]:
 	"""Map each component-tracked balance to its new carried balance."""
-	applied_by_component = {
-		str(row.get("salary_component")): float(row.get("amount") or 0.0) for row in rows
-	}
+	applied_by_component = {str(row.get("salary_component")): float(row.get("amount") or 0.0) for row in rows}
 	writebacks = {}
 	for balance in balances:
 		component = balance.get("salary_component")
@@ -90,7 +86,10 @@ def write_back_shortfall(doc: Any, *_args: Any) -> None:
 	"""on_submit: persist the frozen shortfall per tracked component."""
 	if frappe is None:  # pragma: no cover - no database in Ring 1.
 		return
-	rows = [_row_dict(row) for row in list(getattr(doc, "earnings", []) or []) + list(getattr(doc, "deductions", []) or [])]
+	rows = [
+		_row_dict(row)
+		for row in list(getattr(doc, "earnings", []) or []) + list(getattr(doc, "deductions", []) or [])
+	]
 	balances = _load_balances(getattr(doc, "employee", None))
 	for label, new_balance in compute_writebacks(balances, rows).items():
 		frappe.db.set_value(
