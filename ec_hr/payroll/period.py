@@ -56,6 +56,8 @@ def iess_billable_days(
 	month_length = (last - first).days + 1
 	start = max(hire_date, first) if hire_date is not None else first
 	end = min(exit_date, last) if exit_date is not None else last
+	if end < start:
+		raise ValueError(_("Hire date is after exit date."))
 	present = (end - start).days + 1
 	return max(_scaled(present, month_length) - absence_days, 0)
 

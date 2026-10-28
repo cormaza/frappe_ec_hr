@@ -847,3 +847,7 @@ msgstr "La base del décimo tercero no puede ser negativa."
 #: ec_hr/payroll/profit_sharing.py
 msgid "Worked days cannot be negative."
 msgstr "Los días trabajados no pueden ser negativos."
+
+#: ec_hr/payroll/period.py
+msgid "Hire date is after exit date."
+msgstr "La fecha de ingreso es posterior a la fecha de salida."
