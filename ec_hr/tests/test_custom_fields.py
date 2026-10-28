@@ -28,6 +28,28 @@ class TestCustomFieldsStructure(UnitTestCase):
 		options = str(fields["ec_contract_kind"]["options"]).split("\n")
 		self.assertEqual(sorted(options), sorted(kind.value for kind in ContractKind))
 
+	def test_salary_slip_fields_have_expected_fieldnames(self) -> None:
+		fields = get_custom_fields()["Salary Slip"]
+		self.assertTrue(fields)
+		names = [f["fieldname"] for f in fields]
+		for expected in (
+			"ec_hourly_rate",
+			"ec_overtime_day_min",
+			"ec_overtime_night_min",
+			"ec_extraordinary_min",
+			"ec_night_min",
+			"ec_overtime_daily_max_min",
+			"ec_overtime_weekly_min",
+			"ec_alimony_order",
+			"ec_advance_deduction",
+		):
+			self.assertIn(expected, names)
+		for field in fields:
+			with self.subTest(field=field.get("fieldname")):
+				self.assertIn("fieldname", field)
+				self.assertIn("label", field)
+				self.assertIn("fieldtype", field)
+
 
 class TestFamilyChargeDoctypeJson(UnitTestCase):
 	"""DocType JSON parses and declares the Art. 97 charge shape."""

@@ -13,4 +13,7 @@ doc_events = {
 	"Employee": {
 		"validate": "ec_hr.ecuador_hr.employee_hooks.validate_employee",
 	},
+	"Salary Slip": {
+		"validate": "ec_hr.ecuador_hr.salary_slip_hooks.validate_salary_slip",
+	},
 }

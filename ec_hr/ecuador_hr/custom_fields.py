@@ -89,5 +89,52 @@ def get_custom_fields() -> dict[str, list[dict[str, object]]]:
 				"label": "Disability Substitute",
 				"fieldtype": "Check",
 			},
-		]
+		],
+		"Salary Slip": [
+			{
+				"fieldname": "ec_hourly_rate",
+				"label": "Hourly Rate",
+				"fieldtype": "Currency",
+			},
+			{
+				"fieldname": "ec_overtime_day_min",
+				"label": "Overtime Daytime Minutes",
+				"fieldtype": "Int",
+			},
+			{
+				"fieldname": "ec_overtime_night_min",
+				"label": "Overtime Night Minutes",
+				"fieldtype": "Int",
+			},
+			{
+				"fieldname": "ec_extraordinary_min",
+				"label": "Extraordinary Minutes",
+				"fieldtype": "Int",
+			},
+			{
+				"fieldname": "ec_night_min",
+				"label": "Night Minutes",
+				"fieldtype": "Int",
+			},
+			{
+				"fieldname": "ec_overtime_daily_max_min",
+				"label": "Overtime Daily Max Minutes",
+				"fieldtype": "Int",
+			},
+			{
+				"fieldname": "ec_overtime_weekly_min",
+				"label": "Overtime Weekly Minutes",
+				"fieldtype": "Int",
+			},
+			{
+				"fieldname": "ec_alimony_order",
+				"label": "Alimony Order Amount",
+				"fieldtype": "Currency",
+			},
+			{
+				"fieldname": "ec_advance_deduction",
+				"label": "Salary Advance Deduction",
+				"fieldtype": "Currency",
+			},
+		],
 	}

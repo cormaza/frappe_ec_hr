@@ -6,6 +6,7 @@ from ec_hr.ecuador_hr.employee_hooks import validate_employee
 
 try:
 	import frappe
+
 	_RING_ERRORS = (ValueError, frappe.ValidationError)
 except ImportError:  # pragma: no cover - Ring 1 has no frappe package.
 	frappe = None  # type: ignore[assignment]

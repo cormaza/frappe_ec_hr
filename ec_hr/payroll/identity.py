@@ -35,14 +35,14 @@ _RUC_PUBLIC_COEFFICIENTS = (3, 2, 7, 6, 5, 4, 3, 2)
 
 def _mod10_check(first_nine: str) -> int:
 	total = 0
-	for digit, coef in zip(first_nine, _CI_COEFFICIENTS):
+	for digit, coef in zip(first_nine, _CI_COEFFICIENTS, strict=True):
 		product = int(digit) * coef
 		total += product - 9 if product >= 10 else product
 	return (10 - total % 10) % 10
 
 
 def _mod11_check(base: str, coefficients: tuple[int, ...]) -> int:
-	total = sum(int(digit) * coef for digit, coef in zip(base, coefficients))
+	total = sum(int(digit) * coef for digit, coef in zip(base, coefficients, strict=True))
 	return (11 - total % 11) % 11
 
 

@@ -1,7 +1,13 @@
 import unittest
 from datetime import date
 
-from ec_hr.payroll.age import YouthCategory, age_on, is_prohibited_assignment, vacation_annual_days, youth_category
+from ec_hr.payroll.age import (
+	YouthCategory,
+	age_on,
+	is_prohibited_assignment,
+	vacation_annual_days,
+	youth_category,
+)
 
 try:
 	from frappe.tests import UnitTestCase

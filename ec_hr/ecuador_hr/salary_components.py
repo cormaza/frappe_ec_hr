@@ -1,0 +1,56 @@
+"""Ecuadorian Salary Component specs (pure data, no frappe import).
+
+Each spec is a `frappe.get_doc` argument dict for the hrms Salary Component
+DocType. Formulas use plain arithmetic on slip fields only: hrms evaluates
+formulas in a sandbox without our payroll modules in scope, so the factors
+below mirror `ec_hr.payroll.overtime` (1.5 / 2.25 / 2.0 / 0.25) and the
+Ring 1 test pins each factor per component to stop drift.
+"""
+
+
+def get_salary_components() -> list[dict[str, object]]:
+	"""Return the six Ecuadorian time-engine Salary Component specs."""
+	return [
+		{
+			"doctype": "Salary Component",
+			"name": "EC Overtime Daytime 50%",
+			"salary_component": "EC Overtime Daytime 50%",
+			"type": "Earning",
+			"formula": "(doc.ec_hourly_rate or 0) * 1.5 * (doc.ec_overtime_day_min or 0) / 60",
+		},
+		{
+			"doctype": "Salary Component",
+			"name": "EC Overtime Night 100%",
+			"salary_component": "EC Overtime Night 100%",
+			"type": "Earning",
+			"formula": "(doc.ec_hourly_rate or 0) * 2.25 * (doc.ec_overtime_night_min or 0) / 60",
+		},
+		{
+			"doctype": "Salary Component",
+			"name": "EC Extraordinary 100%",
+			"salary_component": "EC Extraordinary 100%",
+			"type": "Earning",
+			"formula": "(doc.ec_hourly_rate or 0) * 2.0 * (doc.ec_extraordinary_min or 0) / 60",
+		},
+		{
+			"doctype": "Salary Component",
+			"name": "EC Night Premium 25%",
+			"salary_component": "EC Night Premium 25%",
+			"type": "Earning",
+			"formula": "(doc.ec_hourly_rate or 0) * 0.25 * (doc.ec_night_min or 0) / 60",
+		},
+		{
+			"doctype": "Salary Component",
+			"name": "EC Alimony Withholding",
+			"salary_component": "EC Alimony Withholding",
+			"type": "Deduction",
+			"formula": "doc.ec_alimony_order or 0",
+		},
+		{
+			"doctype": "Salary Component",
+			"name": "EC Salary Advance Deduction",
+			"salary_component": "EC Salary Advance Deduction",
+			"type": "Deduction",
+			"formula": "doc.ec_advance_deduction or 0",
+		},
+	]

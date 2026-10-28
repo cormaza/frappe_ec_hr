@@ -2,8 +2,8 @@ import unittest
 from datetime import date
 
 from ec_hr.payroll.contract import (
-	ContractKind,
 	TERMINATION_CAUSES,
+	ContractKind,
 	ends_with_desahucio_bonus,
 	is_provisional,
 	probation_end_date,
