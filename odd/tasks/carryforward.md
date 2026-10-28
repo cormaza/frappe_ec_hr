@@ -23,7 +23,7 @@ consumer. v1: EC Deduction Balance ledger + `before_validate` injection into
 - T1: pure helpers + tests.
 - T2: DocType + controller + tests.
 - T3: hooks + tests + catalog.
-- T4: bench verify + commits on `feat/carryforward`.
+- T4: bench verify + commits — DONE (290 unit + 2 integration green on ec_test; format commit b59769e).
 
 ## Log
 
@@ -37,5 +37,4 @@ consumer. v1: EC Deduction Balance ledger + `before_validate` injection into
   (b) structure rows snapshot component formulas, and manual row edits do
   not survive save recalculation — seed formula changes need structure
   refresh, open question below.
-- L3: OPEN — should ensure_* refresh EC-component rows in user structures?
-  Untouched-row detection is unreliable; manual refresh documented.
+- L3: CLOSED — `ensure_salary_components()` in `ecuador_hr/setup.py` already refreshes formula + amount_based_on_formula on existing rows (never user amounts), so seed formula changes propagate via migrate/install without manual refresh.
