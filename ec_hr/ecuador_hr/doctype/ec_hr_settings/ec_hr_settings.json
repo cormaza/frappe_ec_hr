@@ -1,0 +1,56 @@
+{
+ "actions": [],
+ "creation": "2026-10-28 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "sbu_rates",
+  "cona_table_year",
+  "sri_table_year",
+  "rdep_schema_version"
+ ],
+ "fields": [
+  {
+   "fieldname": "sbu_rates",
+   "fieldtype": "Table",
+   "label": "SBU Rates by Year",
+   "options": "EC SBU Rate"
+  },
+  {
+   "fieldname": "cona_table_year",
+   "fieldtype": "Int",
+   "label": "CONA Table Year"
+  },
+  {
+   "fieldname": "sri_table_year",
+   "fieldtype": "Int",
+   "label": "SRI Table Year"
+  },
+  {
+   "fieldname": "rdep_schema_version",
+   "fieldtype": "Data",
+   "label": "RDEP Schema Version"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-10-28 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Ecuador HR",
+ "name": "EC HR Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "HR Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
