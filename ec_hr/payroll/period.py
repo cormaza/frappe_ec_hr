@@ -11,6 +11,14 @@ with a floor at zero.
 import calendar
 from datetime import date
 
+try:
+	from frappe import _
+except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
+
+	def _(message: str) -> str:
+		return message
+
+
 #: IESS contribution month base, in days.
 MONTH_BASE_DAYS = 30
 
@@ -39,12 +47,12 @@ def iess_billable_days(
 	outer side (hired before, exited after) count as a full month.
 	"""
 	if absence_days < 0:
-		raise ValueError("Absence days cannot be negative.")
+		raise ValueError(_("Absence days cannot be negative."))
 	first, last = month_bounds(year, month)
 	if hire_date is not None and hire_date > last:
-		raise ValueError("Hire date is after the payroll month.")
+		raise ValueError(_("Hire date is after the payroll month."))
 	if exit_date is not None and exit_date < first:
-		raise ValueError("Exit date is before the payroll month.")
+		raise ValueError(_("Exit date is before the payroll month."))
 	month_length = (last - first).days + 1
 	start = max(hire_date, first) if hire_date is not None else first
 	end = min(exit_date, last) if exit_date is not None else last

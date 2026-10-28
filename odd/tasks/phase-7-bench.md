@@ -75,3 +75,8 @@ schemas (RDEP XSD, bank layouts, MDT payloads) against live sources.
   adopted as canonical; the collector treats `^[\d.]+$` options as
   untranslatable identifiers. Twelfth Pichincha column + IESS batch field
   tables + MDT payload formats remain the only open pins.
+- L12: Slice rebuilt so every commit is green alone (first attempt buried
+  translations one commit late). Recovery lesson: bench-adopted catalog
+  entries were restored from the bench copy after a bad splice. Real bug
+  found by the harness: three period.py ValueErrors lacked `_()` — fixed
+  with the standard guarded import.

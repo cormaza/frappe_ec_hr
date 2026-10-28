@@ -646,3 +646,100 @@ msgstr "Falta el número de cuenta en la fila de pago."
 #: ec_hr/payroll/payments.py:117
 msgid "Payment row lacks identity: numero_id."
 msgstr "Falta el número de identificación en la fila de pago."
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.1"
+msgstr "169.1"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.2"
+msgstr "169.2"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.3"
+msgstr "169.3"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.4"
+msgstr "169.4"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.5"
+msgstr "169.5"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.6"
+msgstr "169.6"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.7"
+msgstr "169.7"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.8"
+msgstr "169.8"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "169.9"
+msgstr "169.9"
+
+#: ec_hr/ecuador_hr/doctype/ec_hr_settings/ec_hr_settings.py:37
+msgid "Duplicate SBU rate year: {0}."
+msgstr "Año SBU duplicado: {0}."
+
+#: ec_hr/ecuador_hr/doctype/ec_family_charge/ec_family_charge.json
+msgid "EC Family Charge"
+msgstr "Carga familiar EC"
+
+#: ec_hr/ecuador_hr/doctype/ec_sbu_rate/ec_sbu_rate.json
+msgid "EC SBU Rate"
+msgstr "SBU por año EC"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+#: ec_hr/ecuador_hr/workspace/ecuador_hr/ecuador_hr.json
+msgid "EC Settlement Act"
+msgstr "Acta de finiquito EC"
+
+#: ec_hr/ecuador_hr/workspace/ecuador_hr/ecuador_hr.json
+msgid "Ecuador HR"
+msgstr "Ecuador HR"
+
+#: ec_hr/ecuador_hr/doctype/ec_family_charge/ec_family_charge.json
+#: ec_hr/ecuador_hr/doctype/ec_hr_settings/ec_hr_settings.json
+#: ec_hr/ecuador_hr/doctype/ec_sbu_rate/ec_sbu_rate.json
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "HR Manager"
+msgstr "HR Manager"
+
+#: ec_hr/ecuador_hr/workspace/ecuador_hr/ecuador_hr.json
+msgid "Leave Application"
+msgstr "Leave Application"
+
+#: ec_hr/ecuador_hr/doctype/ec_hr_settings/ec_hr_settings.py:48
+#: ec_hr/ecuador_hr/doctype/ec_hr_settings/ec_hr_settings.py:49
+msgid "No SBU rate stored for year {0}."
+msgstr "Sin SBU registrado para el año {0}."
+
+#: ec_hr/ecuador_hr/doctype/ec_hr_settings/ec_hr_settings.py:40
+msgid "SBU amount must be positive for year {0}."
+msgstr "El monto del SBU debe ser positivo para el año {0}."
+
+#: ec_hr/ecuador_hr/doctype/ec_hr_settings/ec_hr_settings.py:35
+msgid "SBU rate year must be positive."
+msgstr "El año del SBU debe ser positivo."
+
+#: ec_hr/ecuador_hr/workspace/ecuador_hr/ecuador_hr.json
+msgid "Salary Component"
+msgstr "Salary Component"
+
+#: ec_hr/ecuador_hr/workspace/ecuador_hr/ecuador_hr.json
+msgid "Salary Slip"
+msgstr "Salary Slip"
+
+#: ec_hr/ecuador_hr/workspace/ecuador_hr/ecuador_hr.json
+msgid "Salary Structure"
+msgstr "Salary Structure"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.json
+msgid "untimely"
+msgstr "untimely"
