@@ -5,6 +5,7 @@ from ec_hr.ecuador_hr.leave_application_hooks import CLINICAL_LEAVE_TYPES, valid
 
 try:
 	import frappe
+
 	_RING_ERRORS = (ValueError, frappe.ValidationError)
 except ImportError:  # pragma: no cover - Ring 1 has no frappe package.
 	frappe = None  # type: ignore[assignment]
@@ -26,7 +27,9 @@ class TestLeaveCertificateHook(UnitTestCase):
 	"""Clinical leaves need a certificate; ordinary leaves pass bare."""
 
 	def test_clinical_types_covered(self) -> None:
-		self.assertEqual(CLINICAL_LEAVE_TYPES, frozenset({"Sick Leave", "Maternity Leave", "Paternity Leave"}))
+		self.assertEqual(
+			CLINICAL_LEAVE_TYPES, frozenset({"Sick Leave", "Maternity Leave", "Paternity Leave"})
+		)
 
 	def test_clinical_without_certificate_fails(self) -> None:
 		for leave_type in ("Sick Leave", "Maternity Leave", "Paternity Leave"):

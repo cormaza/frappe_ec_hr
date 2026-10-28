@@ -30,6 +30,4 @@ def validate_leave_application(doc: Any) -> None:
 	"""Require a medical certificate for clinical leaves (doc_events hook)."""
 	if getattr(doc, "leave_type", None) in CLINICAL_LEAVE_TYPES:
 		if not getattr(doc, "ec_medical_certificate", None):
-			_fail(
-				_("A medical certificate is required for {0}.").format(doc.leave_type)
-			)
+			_fail(_("A medical certificate is required for {0}.").format(doc.leave_type))

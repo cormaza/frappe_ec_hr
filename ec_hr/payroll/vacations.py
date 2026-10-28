@@ -41,9 +41,7 @@ def _full_months(hire_date: date, as_of: date) -> int:
 
 def accrued_days(hire_date: date, as_of: date, birthdate: date) -> float:
 	"""Return vacation days accrued on `as_of` for service since `hire_date`."""
-	annual = vacation_annual_days(
-		youth_category(birthdate, as_of), service_years(hire_date, as_of)
-	)
+	annual = vacation_annual_days(youth_category(birthdate, as_of), service_years(hire_date, as_of))
 	return round(annual * _full_months(hire_date, as_of) / 12, 2)
 
 
