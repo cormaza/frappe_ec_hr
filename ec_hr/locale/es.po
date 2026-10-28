@@ -1,0 +1,568 @@
+# Ecuadorian Spanish translations for ec_hr.
+# Copyright (C) 2026 Ecuador HR Contributors
+# This file is distributed under the same license as the ec_hr package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ec_hr 16.0.0\n"
+"Report-Msgid-Bugs-To: developers@example.com\n"
+"POT-Creation-Date: 2026-10-28 12:00\n"
+"PO-Revision-Date: 2026-10-28 12:00\n"
+"Last-Translator: Ecuador HR Contributors <developers@example.com>\n"
+"Language-Team: Spanish (Ecuador) <developers@example.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Accredited On"
+msgstr "Fecha de acreditación"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Accumulate Fourteenth Salary"
+msgstr "Acumular décima cuarta remuneración"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Accumulate Thirteenth Salary"
+msgstr "Acumular décima tercera remuneración"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Alimony Order Amount"
+msgstr "Monto de pensión alimenticia ordenada"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Birthdate"
+msgstr "Fecha de nacimiento"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "SBU Amount"
+msgstr "Monto del SBU"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "SBU Rates by Year"
+msgstr "SBU por año"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "CONA Table Year"
+msgstr "Año de tabla CONA"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "SRI Table Year"
+msgstr "Año de tabla SRI"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "CONADIS Card Reference"
+msgstr "Referencia de carné CONADIS"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Cedula"
+msgstr "Cédula"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Desahucio Bonus"
+msgstr "Bonificación por desahucio"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Disability Card Expiry"
+msgstr "Vencimiento del carné de discapacidad"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Disability Percentage"
+msgstr "Porcentaje de discapacidad"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Disability Substitute"
+msgstr "Sustituto por discapacidad"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "EC Alimony Withholding"
+msgstr "Retención judicial por alimentos EC"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "EC Extraordinary 100%"
+msgstr "Horas extraordinarias 100% EC"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "EC Night Premium 25%"
+msgstr "Recargo nocturno 25% EC"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "EC Overtime Daytime 50%"
+msgstr "Horas suplementarias diurnas 50% EC"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "EC Overtime Night 100%"
+msgstr "Horas suplementarias nocturnas 100% EC"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "EC HR Settings"
+msgstr "Configuración EC HR"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "EC Salary Advance Deduction"
+msgstr "Descuento por anticipo de sueldo EC"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Ecuadorian Contract Kind"
+msgstr "Tipo de contrato ecuatoriano"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Ecuadorian ID Number"
+msgstr "Número de identificación ecuatoriano"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Ecuadorian ID Type"
+msgstr "Tipo de identificación ecuatoriana"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Ecuadorian ID Validated"
+msgstr "Identificación ecuatoriana validada"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Employee"
+msgstr "Empleado"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Employee Advances"
+msgstr "Anticipos a empleados"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Ends On"
+msgstr "Fecha de finalización"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Extraordinary Minutes"
+msgstr "Minutos extraordinarios"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Fourteenth Salary Region"
+msgstr "Región de décima cuarta remuneración"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Hourly Rate"
+msgstr "Tarifa por hora"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "IESS Entry Notice Date"
+msgstr "Fecha de aviso de entrada al IESS"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "IESS Exit Notice Date"
+msgstr "Fecha de aviso de salida al IESS"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Last Monthly Remuneration"
+msgstr "Última remuneración mensual"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Medical Certificate"
+msgstr "Certificado médico"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Nationality"
+msgstr "Nacionalidad"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Night Minutes"
+msgstr "Minutos nocturnos"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Overtime Daily Max Minutes"
+msgstr "Minutos máximos diarios de horas extras"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Overtime Daytime Minutes"
+msgstr "Minutos de horas extras diurnas"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Overtime Night Minutes"
+msgstr "Minutos de horas extras nocturnas"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Overtime Weekly Minutes"
+msgstr "Minutos semanales de horas extras"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Passport"
+msgstr "Pasaporte"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Payroll Operations"
+msgstr "Operaciones de nómina"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Probation End Date"
+msgstr "Fecha de fin del período de prueba"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "RUC Natural"
+msgstr "RUC persona natural"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "RUC Private"
+msgstr "RUC sociedad privada"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "RUC Public"
+msgstr "RUC sociedad pública"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "RDEP Schema Version"
+msgstr "Versión del esquema RDEP"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Relation"
+msgstr "Parentesco"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "SUT Contract ID"
+msgstr "ID de contrato SUT"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "SUT Filing Reference"
+msgstr "Referencia de registro SUT"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Salary Advance Deduction"
+msgstr "Descuento por anticipo de sueldo"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Service Years"
+msgstr "Años de servicio"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Setup and Filing"
+msgstr "Configuración y reportes"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Statutory Benefits"
+msgstr "Beneficios de ley"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Termination Cause"
+msgstr "Causa de terminación"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Termination Date"
+msgstr "Fecha de terminación"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Untimely Dismissal Award"
+msgstr "Indemnización por despido intempestivo"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Visa Type"
+msgstr "Tipo de visa"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Work Permit Expiry"
+msgstr "Vencimiento del permiso de trabajo"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "Year"
+msgstr "Año"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "apprenticeship"
+msgstr "aprendizaje"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "child"
+msgstr "hijo"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "child_with_disability"
+msgstr "hijo con discapacidad"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "costa"
+msgstr "Costa"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "eventual"
+msgstr "eventual"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "indefinite"
+msgstr "indefinido"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "obra_cierta"
+msgstr "obra cierta"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "occasional"
+msgstr "ocasional"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "partner"
+msgstr "conviviente"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "part_time"
+msgstr "jornada parcial"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "seasonal"
+msgstr "temporada"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "sierra"
+msgstr "Sierra"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "special_emergent"
+msgstr "emergente especial"
+
+#: ec_hr/locale/i18n_markers.py
+msgid "spouse"
+msgstr "cónyuge"
+
+#: ec_hr/payroll/deductions.py
+msgid "Alimony needs at least one child."
+msgstr "La pensión alimenticia requiere al menos un hijo."
+
+#: ec_hr/ecuador_hr/leave_application_hooks.py
+msgid "A medical certificate is required for {0}."
+msgstr "Se requiere un certificado médico para {0}."
+
+#: ec_hr/payroll/deductions.py
+msgid "Arrears inputs cannot be negative."
+msgstr "Los valores de mora no pueden ser negativos."
+
+#: ec_hr/payroll/period.py
+msgid "Absence days cannot be negative."
+msgstr "Los días de ausencia no pueden ser negativos."
+
+#: ec_hr/payroll/iess.py
+msgid "Billable days must fall within 0-30."
+msgstr "Los días facturables deben estar entre 0 y 30."
+
+#: ec_hr/payroll/identity.py
+msgid "Cedula check digit is invalid."
+msgstr "El dígito verificador de la cédula es inválido."
+
+#: ec_hr/payroll/identity.py
+msgid "Cedula must be exactly 10 digits."
+msgstr "La cédula debe tener exactamente 10 dígitos."
+
+#: ec_hr/payroll/identity.py
+msgid "Cedula province code must be 01-24 or 30."
+msgstr "El código de provincia de la cédula debe ser 01-24 o 30."
+
+#: ec_hr/payroll/identity.py
+msgid "Cedula third digit must be below 6."
+msgstr "El tercer dígito de la cédula debe ser menor a 6."
+
+#: ec_hr/payroll/family.py
+msgid "Child charge is 18 or older."
+msgstr "El hijo a cargo tiene 18 años o más."
+
+#: ec_hr/payroll/family.py
+msgid "Child charge needs a birthdate."
+msgstr "El hijo a cargo requiere fecha de nacimiento."
+
+#: ec_hr/payroll/family.py
+msgid "Child-with-disability charge needs disability evidence."
+msgstr "El hijo con discapacidad a cargo requiere evidencia de discapacidad."
+
+#: ec_hr/payroll/deductions.py
+msgid "Court-ordered alimony {0} is below the CONA minimum {1}."
+msgstr "La pensión alimenticia ordenada {0} está bajo el mínimo CONA {1}."
+
+#: ec_hr/payroll/overtime.py
+msgid "Day {0} exceeds the 4-hour daily overtime cap."
+msgstr "El día {0} excede el tope diario de 4 horas extras."
+
+#: ec_hr/ecuador_hr/employee_hooks.py
+msgid "Disability Percentage must be between 0 and 100."
+msgstr "El porcentaje de discapacidad debe estar entre 0 y 100."
+
+#: ec_hr/ecuador_hr/employee_hooks.py
+msgid "Ecuadorian ID Number checksum is invalid; flagged for review."
+msgstr "El número de identificación es inválido; marcado para revisión."
+
+#: ec_hr/ecuador_hr/employee_hooks.py
+msgid "Ecuadorian ID Number is not a valid cedula for {0}."
+msgstr "El número de identificación no es una cédula válida para {0}."
+
+#: ec_hr/ecuador_hr/employee_hooks.py
+msgid "Ecuadorian ID Type is required with Ecuadorian ID Number."
+msgstr "El tipo de identificación es obligatorio con el número de identificación."
+
+#: ec_hr/payroll/fourteenth.py
+msgid "Elapsed months cannot be negative."
+msgstr "Los meses transcurridos no pueden ser negativos."
+
+#: ec_hr/ecuador_hr/employee_hooks.py
+msgid "Employees under 15 cannot be hired (Codigo del Trabajo Art. 134)."
+msgstr "No se puede contratar menores de 15 años (Código del Trabajo Art. 134)."
+
+#: ec_hr/payroll/leave.py
+msgid "Enjoyed days must fall within the total leave."
+msgstr "Los días gozados deben estar dentro del total de la licencia."
+
+#: ec_hr/payroll/family.py
+msgid "Family charge ended before the reference date."
+msgstr "La carga familiar terminó antes de la fecha de referencia."
+
+#: ec_hr/payroll/family.py
+msgid "Family charge is not accredited on the reference date."
+msgstr "La carga familiar no está acreditada a la fecha de referencia."
+
+#: ec_hr/payroll/period.py
+msgid "Hire date is after the payroll month."
+msgstr "La fecha de ingreso es posterior al mes de nómina."
+
+#: ec_hr/payroll/period.py
+msgid "Exit date is before the payroll month."
+msgstr "La fecha de salida es anterior al mes de nómina."
+
+#: ec_hr/ecuador_hr/notice_hooks.py
+msgid "IESS entry notice is {0} days late."
+msgstr "El aviso de entrada al IESS tiene {0} días de atraso."
+
+#: ec_hr/ecuador_hr/notice_hooks.py
+msgid "IESS exit notice is {0} days late."
+msgstr "El aviso de salida al IESS tiene {0} días de atraso."
+
+#: ec_hr/ecuador_hr/salary_slip_hooks.py
+msgid "Net pay cannot be negative."
+msgstr "El neto a pagar no puede ser negativo."
+
+#: ec_hr/payroll/accounting.py
+msgid "No accounts mapped for provision concept: {0}."
+msgstr "Sin cuentas asignadas para el concepto de provisión: {0}."
+
+#: ec_hr/payroll/loans.py
+msgid "Notified installment cannot be negative."
+msgstr "La cuota notificada no puede ser negativa."
+
+#: ec_hr/payroll/payments.py
+msgid "Payment row amount must be positive: {0}."
+msgstr "El monto de la fila de pago debe ser positivo: {0}."
+
+#: ec_hr/payroll/payments.py
+msgid "Payment row lacks identity: {0}."
+msgstr "La fila de pago no tiene identificación: {0}."
+
+#: ec_hr/payroll/payments.py
+msgid "Payment rows miss layout columns."
+msgstr "Las filas de pago no tienen las columnas del formato."
+
+#: ec_hr/payroll/profit_sharing.py
+msgid "Profit sharing needs a non-empty roster."
+msgstr "El reparto de utilidades requiere una nómina no vacía."
+
+#: ec_hr/payroll/rdep.py
+msgid "RDEP record field cannot be negative: {0}."
+msgstr "El campo del registro RDEP no puede ser negativo: {0}."
+
+#: ec_hr/payroll/rdep.py
+msgid "RDEP record lacks required key: {0}."
+msgstr "Al registro RDEP le falta la clave obligatoria: {0}."
+
+#: ec_hr/payroll/income_tax.py
+msgid "Rebate and withheld amounts cannot be negative."
+msgstr "La rebaja y lo retenido no pueden ser negativos."
+
+#: ec_hr/payroll/vacations.py
+msgid "Reference date is before the hire date."
+msgstr "La fecha de referencia es anterior a la fecha de ingreso."
+
+#: ec_hr/payroll/identity.py
+msgid "RUC must be exactly 13 digits."
+msgstr "El RUC debe tener exactamente 13 dígitos."
+
+#: ec_hr/payroll/identity.py
+msgid "RUC natural-person base is not a valid cedula."
+msgstr "La base del RUC de persona natural no es una cédula válida."
+
+#: ec_hr/payroll/identity.py
+msgid "RUC private-entity check digit is invalid."
+msgstr "El dígito verificador del RUC de sociedad privada es inválido."
+
+#: ec_hr/payroll/identity.py
+msgid "RUC public-entity check digit is invalid."
+msgstr "El dígito verificador del RUC de sociedad pública es inválido."
+
+#: ec_hr/payroll/identity.py
+msgid "RUC public-entity suffix must be 0001."
+msgstr "El sufijo del RUC de sociedad pública debe ser 0001."
+
+#: ec_hr/payroll/identity.py
+msgid "RUC third digit is not a known entity kind."
+msgstr "El tercer dígito del RUC no es un tipo de entidad conocido."
+
+#: ec_hr/payroll/severance.py
+msgid "Service years cannot be negative."
+msgstr "Los años de servicio no pueden ser negativos."
+
+#: ec_hr/payroll/overtime.py
+msgid "Shift end must be after shift start."
+msgstr "El fin del turno debe ser posterior al inicio."
+
+#: ec_hr/payroll/leave.py
+msgid "Sickness day index starts at 1."
+msgstr "El índice de día de enfermedad empieza en 1."
+
+#: ec_hr/payroll/income_tax.py
+msgid "Tax table cannot be empty."
+msgstr "La tabla impositiva no puede estar vacía."
+
+#: ec_hr/ecuador_hr/doctype/ec_family_charge/ec_family_charge.py
+msgid "Invalid family charge: {0}"
+msgstr "Carga familiar inválida: {0}"
+
+#: ec_hr/ecuador_hr/doctype/ec_settlement_act/ec_settlement_act.py
+msgid "Last monthly remuneration cannot be negative."
+msgstr "La última remuneración mensual no puede ser negativa."
+
+#: ec_hr/payroll/contract.py
+msgid "Unknown termination cause: {0}."
+msgstr "Causa de terminación desconocida: {0}."
+
+#: ec_hr/payroll/deductions.py
+msgid "Unknown deduction kind: {0}."
+msgstr "Tipo de deducción desconocido: {0}."
+
+#: ec_hr/ecuador_hr/employee_hooks.py
+msgid "Unknown Ecuadorian Contract Kind: {0}."
+msgstr "Tipo de contrato ecuatoriano desconocido: {0}."
+
+#: ec_hr/ecuador_hr/employee_hooks.py
+msgid "Unknown Ecuadorian ID Type: {0}."
+msgstr "Tipo de identificación ecuatoriana desconocido: {0}."
+
+#: ec_hr/payroll/family.py
+msgid "Unknown family-charge relation: {0}."
+msgstr "Parentesco de carga familiar desconocido: {0}."
+
+#: ec_hr/payroll/remuneration.py
+msgid "Unknown remuneration kind: {0}."
+msgstr "Tipo de remuneración desconocido: {0}."
+
+#: ec_hr/payroll/payments.py
+msgid "Unknown bank layout: {0}."
+msgstr "Formato bancario desconocido: {0}."
+
+#: ec_hr/payroll/overtime.py
+msgid "Week exceeds the 12-hour weekly overtime cap."
+msgstr "La semana excede el tope semanal de 12 horas extras."
+
+#: ec_hr/payroll/deductions.py
+msgid "Loan principal must be positive."
+msgstr "El capital del préstamo debe ser positivo."
+
+#: ec_hr/payroll/deductions.py
+msgid "Loan rate cannot be negative."
+msgstr "La tasa del préstamo no puede ser negativa."
+
+#: ec_hr/payroll/deductions.py
+msgid "Loan term must be at least one month."
+msgstr "El plazo del préstamo debe ser de al menos un mes."
+
+#: ec_hr/payroll/income_tax.py
+msgid "Months remaining must be at least one."
+msgstr "Los meses restantes deben ser al menos uno."

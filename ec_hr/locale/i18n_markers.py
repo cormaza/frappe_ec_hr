@@ -1,10 +1,89 @@
-"""Gettext extraction markers for ec_hr.
+"""Gettext extraction markers (NEVER imported at runtime).
 
-This module is read by ``bench update-po-files`` and MUST never be imported
-at runtime: ``create_custom_fields`` labels stay raw English in code and are
-translated at display time.
+`bench update-po-files` prunes msgids its scanner cannot see. Custom-field
+labels, Select options, component names, and DocType field labels live in
+the database or in option lists, so every one is repeated here as a real
+`_()` literal for the pot scanner. Each entry mirrors a string already
+present in `custom_fields.py`, `salary_components.py`, or the DocType JSON
+files. Tested by `test_i18n.TestMarkersGuard`: this module must parse, hold
+literals only, and stay unimported by all runtime modules.
 """
 
-from frappe import _
+from frappe import _  # for the scanner, never at runtime
 
-_("Ecuador HR")
+_("Accredited On")
+_("Accumulate Fourteenth Salary")
+_("Accumulate Thirteenth Salary")
+_("Alimony Order Amount")
+_("Birthdate")
+_("SBU Amount")
+_("SBU Rates by Year")
+_("CONADIS Card Reference")
+_("Cedula")
+_("Desahucio Bonus")
+_("Disability Card Expiry")
+_("Disability Percentage")
+_("Disability Substitute")
+_("EC Alimony Withholding")
+_("EC Extraordinary 100%")
+_("EC Night Premium 25%")
+_("EC Overtime Daytime 50%")
+_("EC Overtime Night 100%")
+_("EC HR Settings")
+_("EC Salary Advance Deduction")
+_("Ecuadorian Contract Kind")
+_("Ecuadorian ID Number")
+_("Ecuadorian ID Type")
+_("Ecuadorian ID Validated")
+_("Employee")
+_("Employee Advances")
+_("Ends On")
+_("Extraordinary Minutes")
+_("Fourteenth Salary Region")
+_("Hourly Rate")
+_("IESS Entry Notice Date")
+_("IESS Exit Notice Date")
+_("Last Monthly Remuneration")
+_("Medical Certificate")
+_("Nationality")
+_("Night Minutes")
+_("Overtime Daily Max Minutes")
+_("Overtime Daytime Minutes")
+_("Overtime Night Minutes")
+_("Overtime Weekly Minutes")
+_("Passport")
+_("Payroll Operations")
+_("Probation End Date")
+_("RUC Natural")
+_("RUC Private")
+_("RUC Public")
+_("RDEP Schema Version")
+_("Relation")
+_("SUT Contract ID")
+_("SUT Filing Reference")
+_("Salary Advance Deduction")
+_("CONA Table Year")
+_("SRI Table Year")
+_("Service Years")
+_("Setup and Filing")
+_("Statutory Benefits")
+_("Termination Cause")
+_("Termination Date")
+_("Untimely Dismissal Award")
+_("Visa Type")
+_("Work Permit Expiry")
+_("Year")
+_("apprenticeship")
+_("child")
+_("child_with_disability")
+_("costa")
+_("eventual")
+_("indefinite")
+_("obra_cierta")
+_("occasional")
+_("partner")
+_("part_time")
+_("seasonal")
+_("sierra")
+_("special_emergent")
+_("spouse")
