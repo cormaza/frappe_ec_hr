@@ -1,7 +1,9 @@
 import ast
+import json
 import re
 import unittest
 from pathlib import Path
+
 try:
 	from frappe.tests import UnitTestCase
 except ImportError:  # pragma: no cover
@@ -31,8 +33,29 @@ def _markers_msgids() -> set[str]:
 
 def _code_msgids() -> set[str]:
 	found = set()
-	for path in (*APP_ROOT.glob("payroll/*.py"), *APP_ROOT.glob("ecuador_hr/*.py")):
+	for path in (*APP_ROOT.glob("payroll/*.py"), *APP_ROOT.glob("ecuador_hr/**/*.py")):
 		found.update(_LITERAL_RE.findall(path.read_text(encoding="utf-8")))
+	return found
+
+
+def _doctype_msgids() -> set[str]:
+	# Bare numeric codes (169.1, 172...) are identifiers, not UI strings: the
+	# bench scanner will not keep them all, so they stay untranslated here.
+	found = set()
+	for path in APP_ROOT.glob("ecuador_hr/doctype/*/*.json"):
+		try:
+			definition = json.loads(path.read_text(encoding="utf-8"))
+		except json.JSONDecodeError:
+			continue
+		found.add(str(definition.get("name", "")))
+		for field in definition.get("fields", []):
+			if field.get("label"):
+				found.add(str(field["label"]))
+			for option in str(field.get("options", "")).split("\n"):
+				text = option.strip()
+				if text and not re.fullmatch(r"[\d.]+", text):
+					found.add(text)
+	found.discard("")
 	return found
 
 
@@ -41,7 +64,7 @@ def _po_msgids() -> set[str]:
 	current = None
 	for line in (LOCALE / "es.po").read_text(encoding="utf-8").splitlines():
 		if line.startswith("msgid "):
-			current = ast.literal_eval(line[len("msgid "):].strip())
+			current = ast.literal_eval(line[len("msgid ") :].strip())
 			if current:
 				msgids.add(current)
 	return msgids
@@ -57,7 +80,7 @@ class TestMarkersGuard(UnitTestCase):
 		pattern = re.compile(r"^\s*(import|from)\s+[\w.]*i18n_markers", re.MULTILINE)
 		offenders = [
 			path.name
-			for path in (*APP_ROOT.glob("payroll/*.py"), *APP_ROOT.glob("ecuador_hr/*.py"))
+			for path in (*APP_ROOT.glob("payroll/*.py"), *APP_ROOT.glob("ecuador_hr/**/*.py"))
 			if pattern.search(path.read_text(encoding="utf-8"))
 		]
 		self.assertEqual(offenders, [])
@@ -73,7 +96,7 @@ class TestCatalogCoverage(UnitTestCase):
 
 	def test_code_literals_covered(self) -> None:
 		po = _po_msgids()
-		missing = sorted(m for m in _code_msgids() if m not in po)
+		missing = sorted(m for m in _code_msgids() | _doctype_msgids() if m not in po)
 		self.assertEqual(missing, [])
 
 	def test_po_headers_valid(self) -> None:
