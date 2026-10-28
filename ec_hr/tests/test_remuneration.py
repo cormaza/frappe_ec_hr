@@ -49,11 +49,19 @@ class TestIsRemuneration(UnitTestCase):
 
 class TestContributionBase(UnitTestCase):
 	def test_base_sums_only_remuneration(self) -> None:
-		items = [
-			{"kind": "salary", "amount": 1000.0},
-			{"kind": "overtime_day", "amount": 50.0},
-			{"kind": "thirteenth", "amount": 83.33},
-			{"kind": "occasional_per_diem", "amount": 40.0},
-		]
-		self.assertEqual(contribution_base(items), 1050.0)
+		self.assertEqual(
+			contribution_base(
+				[
+					{"kind": "salary", "amount": 1000.0},
+					{"kind": "overtime_day", "amount": 50.0},
+					{"kind": "thirteenth", "amount": 83.33},
+					{"kind": "occasional_per_diem", "amount": 40.0},
+				]
+			),
+			1050.0,
+		)
 		self.assertEqual(contribution_base([]), 0.0)
+
+	def test_unknown_kind_propagates(self) -> None:
+		with self.assertRaises(ValueError):
+			contribution_base([{"kind": "crypto_bonus", "amount": 5.0}])

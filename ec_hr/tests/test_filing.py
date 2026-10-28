@@ -57,6 +57,16 @@ class TestRdepRecords(UnitTestCase):
 		self.assertEqual(totals["gross"], 18000.0)
 		self.assertEqual(totals["withheld"], 191.9)
 
+	def test_empty_batch_zeroes(self) -> None:
+		totals = validate_batch([])
+		self.assertEqual(
+			totals, {"workers": 0, "gross": 0.0, "taxable": 0.0, "tax_caused": 0.0, "withheld": 0.0}
+		)
+
+	def test_extra_keys_ignored_in_totals(self) -> None:
+		record = build_record(**_worker(extra_note="hi"))
+		self.assertEqual(record["extra_note"], "hi")
+
 
 class TestBankLayouts(UnitTestCase):
 	"""Layouts are caller-provided specs (no invented bank columns); the
@@ -157,6 +167,20 @@ class TestProvisionLines(UnitTestCase):
 				{"account": "2110", "debit": 0.0, "credit": 100.0},
 			],
 		)
+
+	def test_zero_amount_zero_lines(self) -> None:
+		lines = provision_lines([{"concept": "thirteenth", "amount": 0.0}], self.ACCOUNT_MAP)
+		self.assertEqual(
+			lines,
+			[
+				{"account": "5101", "debit": 0.0, "credit": 0.0},
+				{"account": "2110", "debit": 0.0, "credit": 0.0},
+			],
+		)
+
+	def test_negative_amount_fails(self) -> None:
+		with self.assertRaises(ValueError):
+			provision_lines([{"concept": "thirteenth", "amount": -5.0}], self.ACCOUNT_MAP)
 
 	def test_missing_mapping_fails_loud(self) -> None:
 		with self.assertRaises(ValueError):
@@ -268,6 +292,11 @@ class TestRdepXml(UnitTestCase):
 		]
 		positions = [order.index(tag) for tag in sequence]
 		self.assertEqual(positions, sorted(positions))
+
+	def test_empty_workers_omits_block(self) -> None:
+		document = rdep_xml("1790000028001", 2025, [])
+		self.assertNotIn("<retRelDep>", document)
+		self.assertIn("<anio>2025</anio>", document)
 
 	def test_duplicate_and_employer_validation(self) -> None:
 		worker = xsd_worker(_xsd_params())

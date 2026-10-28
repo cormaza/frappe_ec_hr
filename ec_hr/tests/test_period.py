@@ -14,6 +14,10 @@ class TestMonthBounds(UnitTestCase):
 		self.assertEqual(month_bounds(2026, 2), (date(2026, 2, 1), date(2026, 2, 28)))
 		self.assertEqual(month_bounds(2024, 2), (date(2024, 2, 1), date(2024, 2, 29)))
 
+	def test_invalid_month_raises_value_error(self) -> None:
+		with self.assertRaises(ValueError):
+			month_bounds(2026, 13)
+
 
 class TestBillableDays(UnitTestCase):
 	"""IESS month operates on a 30-day base (user decision: assume 30 now;
@@ -35,6 +39,19 @@ class TestBillableDays(UnitTestCase):
 	def test_exit_mid_month_scales(self) -> None:
 		# Mar has 31 days, exit day 10: 30*10/31 = 9.68 -> 10.
 		self.assertEqual(iess_billable_days(2026, 3, exit_date=date(2026, 3, 10)), 10)
+
+	def test_leap_day_hire_and_single_day(self) -> None:
+		# Feb 2024: hired 29th, 1 of 29 days remain: 30*1/29 = 1.03 -> 1.
+		self.assertEqual(iess_billable_days(2024, 2, hire_date=date(2024, 2, 29)), 1)
+		# Single day (Jan 15-15): 30*1/31 = 0.97 -> 1.
+		self.assertEqual(
+			iess_billable_days(2026, 1, hire_date=date(2026, 1, 15), exit_date=date(2026, 1, 15)),
+			1,
+		)
+
+	def test_absences_equal_to_billable_floor_at_zero(self) -> None:
+		# 15 billable (hired Jan 16) minus 15 absences -> 0, never negative.
+		self.assertEqual(iess_billable_days(2026, 1, hire_date=date(2026, 1, 16), absence_days=15), 0)
 
 	def test_hire_and_exit_same_month(self) -> None:
 		# Mar 10-20 inclusive = 11 days: 30*11/31 = 10.65 -> 11.

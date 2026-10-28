@@ -25,6 +25,8 @@ def provision_lines(
 		if concept not in account_map:
 			raise ValueError(_("No accounts mapped for provision concept: {0}.").format(concept))
 		amount = round(float(item["amount"]), 2)
+		if amount < 0:
+			raise ValueError(_("Provision amount cannot be negative: {0}.").format(concept))
 		lines.append({"account": account_map[concept]["expense"], "debit": amount, "credit": 0.0})
 		lines.append({"account": account_map[concept]["liability"], "debit": 0.0, "credit": amount})
 	return lines

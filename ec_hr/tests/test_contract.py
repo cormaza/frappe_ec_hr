@@ -75,6 +75,10 @@ class TestTerminationConsequences(UnitTestCase):
 			ends_with_desahucio_bonus("169.99")
 		with self.assertRaises(ValueError):
 			requires_visto_bueno("169.99")
+		self.assertFalse(requires_visto_bueno("169.9"))
+
+	def test_parse_tolerates_surrounding_case(self) -> None:
+		self.assertEqual(parse_contract_kind(" OBRA CIERTA "), ContractKind.OBRA_CIERTA)
 
 
 class TestProbation(UnitTestCase):

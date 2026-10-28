@@ -30,6 +30,10 @@ class TestPaternity(UnitTestCase):
 	def test_combined_conditions_take_maximum(self) -> None:
 		self.assertEqual(paternity_days(multiple=True, premature_or_special=True), 23)
 		self.assertEqual(paternity_days(cesarean=True, severe_or_terminal=True), 25)
+		self.assertEqual(
+			paternity_days(multiple=True, cesarean=True, premature_or_special=True, severe_or_terminal=True),
+			25,
+		)
 
 
 class TestSicknessLegs(UnitTestCase):
@@ -44,6 +48,10 @@ class TestSicknessLegs(UnitTestCase):
 		self.assertEqual(sickness_legs(4, 100.0, 75.0), (0.0, 75.0))
 		self.assertEqual(sickness_legs(30, 100.0, 75.0), (0.0, 75.0))
 
+	def test_zero_rate_documents_uninsured_gap(self) -> None:
+		# No IESS coverage and no top-up: day 4+ pays nothing from either leg.
+		self.assertEqual(sickness_legs(4, 100.0, 0.0), (0.0, 0.0))
+
 	def test_day_zero_fails(self) -> None:
 		with self.assertRaises(ValueError):
 			sickness_legs(0, 100.0, 75.0)
@@ -55,6 +63,7 @@ class TestMotherDeathTransfer(UnitTestCase):
 	def test_remainder(self) -> None:
 		self.assertEqual(mother_death_transfer(84, 30), 54)
 		self.assertEqual(mother_death_transfer(84, 84), 0)
+		self.assertEqual(mother_death_transfer(84, 0), 84)
 
 	def test_over_enjoyed_fails(self) -> None:
 		with self.assertRaises(ValueError):

@@ -21,6 +21,7 @@ class TestDesahucioBonus(UnitTestCase):
 	def test_bonus(self) -> None:
 		self.assertEqual(desahucio_bonus(1000.0, 4), 1000.0)
 		self.assertEqual(desahucio_bonus(1000.0, 0), 0.0)
+		self.assertEqual(desahucio_bonus(1000.0, 4.9), 1000.0)
 
 	def test_negative_years_fail(self) -> None:
 		with self.assertRaises(ValueError):
@@ -34,7 +35,10 @@ class TestUntimelyAward(UnitTestCase):
 	def test_scale(self) -> None:
 		self.assertEqual(untimely_award(1000.0, 0), 3000.0)
 		self.assertEqual(untimely_award(1000.0, 2), 3000.0)
+		self.assertEqual(untimely_award(1000.0, 3.0), 3000.0)
 		self.assertEqual(untimely_award(1000.0, 5), 5000.0)
+		self.assertEqual(untimely_award(1000.0, 25.0), 25000.0)
+		self.assertEqual(untimely_award(1000.0, 25.2), 25000.0)
 		self.assertEqual(untimely_award(1000.0, 30), 25000.0)
 
 	def test_fraction_rounds_up(self) -> None:
@@ -54,9 +58,30 @@ class TestAnnualTax(UnitTestCase):
 		self.assertEqual(annual_tax(14000.0, TABLE), 95.95)
 		self.assertEqual(annual_tax(20000.0, TABLE), 626.3)
 
-	def test_empty_table_fails(self) -> None:
+	def test_bracket_edges(self) -> None:
+		self.assertEqual(annual_tax(12081.0, TABLE), 0.0)
+		self.assertEqual(annual_tax(12082.0, TABLE), 0.05)
+
+	def test_malformed_tables_fail(self) -> None:
 		with self.assertRaises(ValueError):
 			annual_tax(10000.0, [])
+		with self.assertRaises(ValueError):
+			annual_tax(
+				10000.0,
+				[
+					{"up_to": 15387.0, "base_tax": 0.0, "rate": 0.05},
+					{"up_to": 12081.0, "base_tax": 0.0, "rate": 0.0},
+					{"up_to": None, "base_tax": 165.0, "rate": 0.10},
+				],
+			)
+		with self.assertRaises(ValueError):
+			annual_tax(
+				10000.0,
+				[
+					{"up_to": None, "base_tax": 0.0, "rate": 0.0},
+					{"up_to": 15387.0, "base_tax": 0.0, "rate": 0.05},
+				],
+			)
 
 
 class TestMonthlyWithholding(UnitTestCase):

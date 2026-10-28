@@ -23,17 +23,30 @@ _PRIORITY = {"judicial": 0, "statutory": 1, "voluntary": 2}
 def apply_waterfall(
 	gross: float, deductions: list[dict[str, Any]], *, floor: float = 0.0
 ) -> dict[str, dict[str, float] | float]:
-	"""Apply deductions by priority; return applied, net, and shortfall."""
+	"""Apply deductions by priority; return applied, net, and shortfall.
+
+	Same-label rows merge first (amounts summed, highest priority wins), so a
+	creditor listed twice is treated as one combined claim.
+	"""
 	for deduction in deductions:
 		if deduction.get("kind") not in _PRIORITY:
 			raise ValueError(_("Unknown deduction kind: {0}.").format(deduction.get("kind")))
-	ordered = sorted(deductions, key=lambda item: _PRIORITY[str(item["kind"])])
+	merged: dict[str, dict[str, Any]] = {}
+	for deduction in deductions:
+		label = str(deduction["label"])
+		entry = merged.setdefault(label, {"kind": deduction["kind"], "label": label, "monthly_amount": 0.0})
+		if _PRIORITY[str(deduction["kind"])] < _PRIORITY[str(entry["kind"])]:
+			entry["kind"] = deduction["kind"]
+		entry["monthly_amount"] = round(
+			float(entry["monthly_amount"]) + float(deduction["monthly_amount"]), 2
+		)
+	ordered = sorted(merged.values(), key=lambda item: _PRIORITY[str(item["kind"])])
 	applied: dict[str, float] = {}
 	shortfall: dict[str, float] = {}
 	available = gross - floor
 	for deduction in ordered:
 		label = str(deduction["label"])
-		amount = round(float(deduction["monthly_amount"]) + applied.get(label, 0.0), 2)
+		amount = round(float(deduction["monthly_amount"]), 2)
 		taken = round(min(amount, max(available, 0.0)), 2)
 		applied[label] = taken
 		available = round(available - taken, 2)

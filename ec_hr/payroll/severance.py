@@ -16,11 +16,11 @@ except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
 		return message
 
 
-def desahucio_bonus(last_monthly: float, service_years: int) -> float:
-	"""Return the Art. 185 bonus over completed `service_years`."""
+def desahucio_bonus(last_monthly: float, service_years: float) -> float:
+	"""Return the Art. 185 bonus; fractions floor to completed years."""
 	if service_years < 0:
 		raise ValueError(_("Service years cannot be negative."))
-	return round(0.25 * last_monthly * service_years, 2)
+	return round(0.25 * last_monthly * math.floor(service_years), 2)
 
 
 def untimely_award(monthly: float, years: float) -> float:

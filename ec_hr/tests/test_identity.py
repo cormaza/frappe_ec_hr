@@ -58,6 +58,14 @@ class TestRucValidation(UnitTestCase):
 	def test_valid_private_ruc(self) -> None:
 		self.assertTrue(is_valid_ruc("1790000028001"))
 
+	def test_mod11_strict_ten_is_invalid(self) -> None:
+		# Weighted sum 45, remainder 1 -> check digit 10: no digit matches.
+		self.assertFalse(is_valid_ruc("1970000000001"))
+
+	def test_branch_suffix_accepted(self) -> None:
+		# Establishments beyond 001 share the checksum base.
+		self.assertTrue(is_valid_ruc("1710034065002"))
+
 	def test_private_ruc_with_bad_check_rejected(self) -> None:
 		self.assertFalse(is_valid_ruc("1790000027001"))
 
@@ -78,3 +86,10 @@ class TestClassifyId(UnitTestCase):
 		self.assertEqual(classify_id("1760000070001"), IdKind.RUC_PUBLIC)
 		self.assertEqual(classify_id("AB123456"), IdKind.UNCLASSIFIED)
 		self.assertEqual(classify_id(""), IdKind.UNCLASSIFIED)
+
+	def test_unicode_digits_do_not_crash(self) -> None:
+		# Full-width digits pass isdigit(); the validators must answer bool.
+		full_ci = "１７１００３４０６５"  # noqa: RUF001
+		full_ruc = "１７１００３４０６５００１"  # noqa: RUF001
+		self.assertIsInstance(is_valid_ci(full_ci), bool)
+		self.assertIsInstance(is_valid_ruc(full_ruc), bool)

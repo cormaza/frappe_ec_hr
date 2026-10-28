@@ -8,6 +8,14 @@ the Frappe layer.
 
 from datetime import date
 
+try:
+	from frappe import _
+except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
+
+	def _(message: str) -> str:
+		return message
+
+
 from ec_hr.payroll.vacations import service_years
 
 
@@ -18,4 +26,6 @@ def is_eligible(hire_date: date, as_of: date) -> bool:
 
 def monthly_amount(art95_monthly_base: float) -> float:
 	"""Return the monthly reserve leg: base/12."""
+	if art95_monthly_base < 0:
+		raise ValueError(_("Reserve base cannot be negative."))
 	return round(art95_monthly_base / 12, 2)

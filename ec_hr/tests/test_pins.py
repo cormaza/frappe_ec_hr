@@ -105,6 +105,42 @@ class TestIessBatchLines(UnitTestCase):
 			"0160010070001;0001;2009;07;PFM;0102981931;105.2;2009-07 A 2009-07;01;G",
 		)
 
+	def test_real_death_date_path(self) -> None:
+		self.assertEqual(
+			sal_line(
+				employer_ruc="1090075744001",
+				branch="0001",
+				year=2003,
+				month=3,
+				cedula="1001915212",
+				exit_date="20030131",
+				cause="M",
+				death_date="20030115",
+			),
+			"1090075744001;0001;2003;03;SAL;1001915212;20030131;M;20030115",
+		)
+
+	def test_position_boundary(self) -> None:
+		base = {
+			"employer_ruc": "1090075744001",
+			"branch": "0001",
+			"year": 2003,
+			"month": 3,
+			"cedula": "1001915212",
+			"hired": "19950101",
+			"registered": "20030101",
+			"jornada": "1",
+			"seguro": "R",
+			"employer_code": "2",
+			"relation": "06",
+			"sector": "1608551004148",
+			"salary": 111.11,
+			"origin": "P",
+		}
+		ent_line(**base, position="x" * 64)
+		with self.assertRaises(ValueError):
+			ent_line(**base, position="x" * 65)
+
 	def test_bad_fields_fail(self) -> None:
 		with self.assertRaises(ValueError):
 			sal_line(
@@ -175,6 +211,10 @@ class TestSutChecklist(UnitTestCase):
 		issues = sut_checklist(self._act(signed_acta=None, total=900.0))
 		self.assertIn("missing:signed_acta", issues)
 		self.assertIn("total-mismatch", issues)
+
+	def test_zero_amount_line_flagged(self) -> None:
+		act = self._act(lines=[{"concept": "xiii", "amount": 0.0}], total=0.0)
+		self.assertIn("line-not-positive", sut_checklist(act))
 
 	def test_payment_deadline_thirty_days(self) -> None:
 		self.assertEqual(payment_deadline(date(2026, 10, 1)), date(2026, 10, 31))

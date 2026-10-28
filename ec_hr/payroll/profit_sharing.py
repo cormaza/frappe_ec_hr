@@ -26,6 +26,12 @@ def distribute(
 	"""Split `total_pool` into per-worker shares plus the solidarity excess."""
 	if not days:
 		raise ValueError(_("Profit sharing needs a non-empty roster."))
+	for worked in days.values():
+		if worked < 0:
+			raise ValueError(_("Worked days cannot be negative."))
+	for count in charges.values():
+		if count < 0:
+			raise ValueError(_("Family charges cannot be negative."))
 	pool10 = total_pool * 0.10
 	pool5 = total_pool * 0.05
 	total_days = sum(days.values())

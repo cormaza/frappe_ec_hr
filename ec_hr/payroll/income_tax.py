@@ -20,13 +20,25 @@ def annual_tax(base: float, table: list[dict[str, Any]]) -> float:
 	"""Apply the SRI-bracket `table` to the projected annual `base`."""
 	if not table:
 		raise ValueError(_("Tax table cannot be empty."))
-	previous = 0.0
+	previous: float | None = None
+	for position, row in enumerate(table):
+		up_to = row["up_to"]
+		if up_to is None and position != len(table) - 1:
+			raise ValueError(_("Only the last tax bracket may be open-ended."))
+		if up_to is not None:
+			if previous is not None and float(up_to) <= previous:
+				raise ValueError(_("Tax brackets must be strictly increasing."))
+			previous = float(up_to)
+		if float(row["base_tax"]) < 0 or float(row["rate"]) < 0:
+			raise ValueError(_("Tax bracket figures cannot be negative."))
+	floor = 0.0
 	for row in table:
 		up_to = row["up_to"]
 		if up_to is None or base <= float(up_to):
-			return round(float(row["base_tax"]) + (base - previous) * float(row["rate"]), 2)
-		previous = float(up_to)
-	return round(float(table[-1]["base_tax"]) + (base - previous) * float(table[-1]["rate"]), 2)
+			return round(float(row["base_tax"]) + (base - floor) * float(row["rate"]), 2)
+		floor = float(up_to)
+	last = table[-1]
+	return round(float(last["base_tax"]) + (base - floor) * float(last["rate"]), 2)
 
 
 def monthly_withholding(

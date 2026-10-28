@@ -803,3 +803,47 @@ msgstr "Resultado de validación — revise el número si no está marcado."
 #: ec_hr/ecuador_hr/custom_fields.py
 msgid "Family Charges"
 msgstr "Cargas familiares"
+
+#: ec_hr/payroll/family.py
+msgid "Disability percentage cannot exceed 100."
+msgstr "El porcentaje de discapacidad no puede exceder 100."
+
+#: ec_hr/payroll/fourteenth.py
+msgid "Elapsed months cannot exceed a 12-month cycle."
+msgstr "Los meses no pueden exceder un ciclo de 12 meses."
+
+#: ec_hr/payroll/profit_sharing.py
+msgid "Family charges cannot be negative."
+msgstr "Las cargas familiares no pueden ser negativas."
+
+#: ec_hr/payroll/income_tax.py
+msgid "Only the last tax bracket may be open-ended."
+msgstr "Solo el último tramo puede ser abierto."
+
+#: ec_hr/payroll/accounting.py
+msgid "Provision amount cannot be negative: {0}."
+msgstr "El monto de provisión no puede ser negativo: {0}."
+
+#: ec_hr/payroll/reserve.py
+msgid "Reserve base cannot be negative."
+msgstr "La base de reserva no puede ser negativa."
+
+#: ec_hr/payroll/fourteenth.py
+msgid "SBU cannot be negative."
+msgstr "El SBU no puede ser negativo."
+
+#: ec_hr/payroll/income_tax.py
+msgid "Tax bracket figures cannot be negative."
+msgstr "Las cifras del tramo no pueden ser negativas."
+
+#: ec_hr/payroll/income_tax.py
+msgid "Tax brackets must be strictly increasing."
+msgstr "Los tramos deben ser estrictamente crecientes."
+
+#: ec_hr/payroll/thirteenth.py
+msgid "Thirteenth base cannot be negative."
+msgstr "La base del décimo tercero no puede ser negativa."
+
+#: ec_hr/payroll/profit_sharing.py
+msgid "Worked days cannot be negative."
+msgstr "Los días trabajados no pueden ser negativos."

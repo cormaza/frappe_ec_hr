@@ -49,6 +49,17 @@ class TestValidateEmployeePure(UnitTestCase):
 		validate_employee(doc)
 		self.assertEqual(doc.ec_id_validated, 0)
 
+	def test_valid_ruc_flags_validated(self) -> None:
+		doc = _doc(ec_id_type="RUC Natural", ec_id_number="1710034065001")
+		validate_employee(doc)
+		self.assertEqual(doc.ec_id_validated, 1)
+
+	def test_whitespace_id_treated_as_missing(self) -> None:
+		# Blank-after-strip never reaches the validators (fail-open documented).
+		doc = _doc(ec_id_type="Cedula", ec_id_number="   ")
+		validate_employee(doc)
+		self.assertEqual(doc.ec_id_validated, 0)
+
 	def test_number_without_type_fails(self) -> None:
 		with self.assertRaises(_RING_ERRORS):
 			validate_employee(_doc(ec_id_number="1710034065"))

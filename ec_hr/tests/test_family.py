@@ -59,6 +59,17 @@ class TestFamilyCharges(UnitTestCase):
 		charge = _charge(relation="child_with_disability", birthdate=date(1986, 3, 10))
 		self.assertFalse(is_valid_charge(charge, AS_OF))
 
+	def test_disability_over_100_fails_loud(self) -> None:
+		charge = _charge(relation="child_with_disability", birthdate=date(1986, 3, 10), disability_pct=120.0)
+		with self.assertRaises(ValueError):
+			is_valid_charge(charge, AS_OF)
+
+	def test_future_accreditation_does_not_count(self) -> None:
+		self.assertFalse(is_valid_charge(_charge(accredited_on=date(2027, 1, 1)), AS_OF))
+
+	def test_ends_on_reference_date_still_counts(self) -> None:
+		self.assertTrue(is_valid_charge(_charge(ends_on=AS_OF), AS_OF))
+
 	def test_unknown_relation_fails_loud(self) -> None:
 		with self.assertRaises(ValueError):
 			is_valid_charge(_charge(relation="cousin"), AS_OF)

@@ -95,6 +95,10 @@ class TestSettingsValidation(UnitTestCase):
 		with self.assertRaises(_RING_ERRORS):
 			_settings([{"year": 2025, "amount": 550.0}]).get_sbu(2026)
 
+	def test_negative_year_fails(self) -> None:
+		with self.assertRaises(_RING_ERRORS):
+			_settings([{"year": -2025, "amount": 550.0}]).validate()
+
 
 @unittest.skipUnless(frappe is not None, "bench-only: needs the installed Single")
 class TestSettingsBench(UnitTestCase):

@@ -24,6 +24,13 @@ class TestAgeOn(UnitTestCase):
 	def test_day_before_birthday(self) -> None:
 		self.assertEqual(age_on(date(2008, 10, 28), date(2026, 10, 27)), 17)
 
+	def test_newborn_is_zero(self) -> None:
+		self.assertEqual(age_on(date(2026, 10, 28), date(2026, 10, 28)), 0)
+
+	def test_future_birthdate_fails_closed(self) -> None:
+		# Negative ages land UNDER_15: unknown youth never passes as adult.
+		self.assertEqual(youth_category(date(2027, 1, 1), date(2026, 10, 28)), YouthCategory.UNDER_15)
+
 	def test_leap_day_birthday(self) -> None:
 		self.assertEqual(age_on(date(2020, 2, 29), date(2026, 2, 28)), 5)
 		self.assertEqual(age_on(date(2020, 2, 29), date(2026, 3, 1)), 6)
@@ -46,6 +53,9 @@ class TestProhibitedAssignment(UnitTestCase):
 
 	def test_under_15_always_blocked(self) -> None:
 		self.assertTrue(is_prohibited_assignment(YouthCategory.UNDER_15))
+		self.assertTrue(
+			is_prohibited_assignment(YouthCategory.UNDER_15, night=True, hazardous=True, overtime=True)
+		)
 
 	def test_adolescent_blocked_only_for_restricted_flags(self) -> None:
 		self.assertFalse(is_prohibited_assignment(YouthCategory.AGE_15))
@@ -71,3 +81,4 @@ class TestVacationAnnualDays(UnitTestCase):
 		self.assertEqual(vacation_annual_days(YouthCategory.ADULT, seniority_years=5), 15)
 		self.assertEqual(vacation_annual_days(YouthCategory.ADULT, seniority_years=6), 16)
 		self.assertEqual(vacation_annual_days(YouthCategory.ADULT, seniority_years=30), 30)
+		self.assertEqual(vacation_annual_days(YouthCategory.ADULT, seniority_years=-3), 15)

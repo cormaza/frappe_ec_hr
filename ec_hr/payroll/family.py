@@ -46,6 +46,8 @@ def charge_rejection_reason(charge: dict[str, Any], as_of: date) -> str | None:
 		return None
 	if float(charge.get("disability_pct") or 0.0) <= 0.0:
 		return _("Child-with-disability charge needs disability evidence.")
+	if float(charge.get("disability_pct") or 0.0) > 100.0:
+		raise ValueError(_("Disability percentage cannot exceed 100."))
 	return None
 
 

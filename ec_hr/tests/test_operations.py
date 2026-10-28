@@ -31,6 +31,12 @@ class TestPlanillaLine(UnitTestCase):
 			{"base": 0.0, "personal": 0.0, "employer": 0.0, "total": 0.0},
 		)
 
+	def test_full_month_matches_seed_rates(self) -> None:
+		# Independent cross-check against the seeded percentages.
+		line = planilla_line(2000.0, 30)
+		self.assertEqual(line["personal"], round(2000.0 * 9.45 / 100, 2))
+		self.assertEqual(line["employer"], round(2000.0 * 11.15 / 100, 2))
+
 	def test_out_of_range_days_fail(self) -> None:
 		with self.assertRaises(ValueError):
 			planilla_line(1000.0, 31)
@@ -60,8 +66,13 @@ class TestBiessLegs(UnitTestCase):
 
 	def test_withholding_passthrough(self) -> None:
 		self.assertEqual(withholding(150.5), 150.5)
+		self.assertEqual(withholding(0.0), 0.0)
 		with self.assertRaises(ValueError):
 			withholding(-10.0)
+
+	def test_over_withheld_goes_negative(self) -> None:
+		# Credit balance: the employer advanced more than notified.
+		self.assertEqual(carry_arrears(0.0, 100.0, 150.0), -50.0)
 
 	def test_arrears_carry(self) -> None:
 		self.assertEqual(carry_arrears(100.0, 150.0, 150.0), 100.0)

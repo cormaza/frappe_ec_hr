@@ -49,6 +49,10 @@ class TestNoticeWarnings(UnitTestCase):
 		self.assertIsNotNone(exit_warning(late, AS_OF))
 		self.assertIsNone(exit_warning(_doc(), AS_OF))
 
+	def test_notice_on_deadline_is_quiet(self) -> None:
+		doc = _doc(date_of_joining=date(2026, 10, 1), ec_entry_notice_date=date(2026, 10, 16))
+		self.assertIsNone(entry_warning(doc, AS_OF))
+
 	def test_validate_never_raises(self) -> None:
 		validate_employee_notices(_doc(date_of_joining=date(2026, 9, 1)))
 		validate_employee_notices(_doc())

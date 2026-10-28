@@ -29,6 +29,15 @@ class TestAccruedDays(UnitTestCase):
 		days = accrued_days(date(2025, 10, 28), date(2026, 10, 28), ADULT_BORN)
 		self.assertEqual(days, 15.0)
 
+	def test_same_day_hire_accrues_zero(self) -> None:
+		days = accrued_days(date(2026, 10, 28), date(2026, 10, 28), ADULT_BORN)
+		self.assertEqual(days, 0.0)
+
+	def test_seniority_uplift_flows_through(self) -> None:
+		# 6 full years of service -> 16 days/year, 72 months accrued gross.
+		days = accrued_days(date(2020, 10, 28), date(2026, 10, 28), ADULT_BORN)
+		self.assertEqual(days, 96.0)
+
 	def test_partial_months(self) -> None:
 		days = accrued_days(date(2026, 7, 28), date(2026, 10, 28), ADULT_BORN)
 		self.assertEqual(days, 3.75)
@@ -47,6 +56,11 @@ class TestLiquidation(UnitTestCase):
 
 	def test_liquidation_twenty_fourth(self) -> None:
 		self.assertEqual(liquidation(24000.0), 1000.0)
+		self.assertEqual(liquidation(0.0), 0.0)
+
+	def test_accrued_before_hire_fails(self) -> None:
+		with self.assertRaises(ValueError):
+			accrued_days(date(2026, 5, 1), date(2026, 1, 1), ADULT_BORN)
 
 	def test_monthly_provision(self) -> None:
 		self.assertEqual(provision(2000.0), 83.33)

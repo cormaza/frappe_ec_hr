@@ -25,6 +25,8 @@ class Region(str, Enum):
 
 def monthly_amount(sbu: float) -> float:
 	"""Return the monthly XIV leg: SBU/12."""
+	if sbu < 0:
+		raise ValueError(_("SBU cannot be negative."))
 	return round(sbu / 12, 2)
 
 
@@ -32,6 +34,8 @@ def accumulated_due(sbu: float, elapsed_months: int) -> float:
 	"""Return SBU/12 scaled by elapsed months in the accumulation cycle."""
 	if elapsed_months < 0:
 		raise ValueError(_("Elapsed months cannot be negative."))
+	if elapsed_months > 12:
+		raise ValueError(_("Elapsed months cannot exceed a 12-month cycle."))
 	return round(sbu / 12 * elapsed_months, 2)
 
 

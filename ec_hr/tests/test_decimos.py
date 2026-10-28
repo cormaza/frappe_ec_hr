@@ -16,6 +16,10 @@ class TestThirteenth(UnitTestCase):
 	def test_accrue_twelfth(self) -> None:
 		self.assertEqual(thirteenth.accrue(12000.0), 1000.0)
 
+	def test_negative_base_fails(self) -> None:
+		with self.assertRaises(ValueError):
+			thirteenth.accrue(-100.0)
+
 	def test_monthly_and_accumulated_share_math(self) -> None:
 		self.assertEqual(thirteenth.monthly_amount(1200.0), 100.0)
 		self.assertEqual(thirteenth.accumulated_due(12000.0), 1000.0)
@@ -32,6 +36,13 @@ class TestFourteenth(UnitTestCase):
 	def test_accumulated_by_elapsed_months(self) -> None:
 		self.assertEqual(fourteenth.accumulated_due(550.0, 7), 320.83)
 		self.assertEqual(fourteenth.accumulated_due(550.0, 0), 0.0)
+		self.assertEqual(fourteenth.accumulated_due(550.0, 12), 550.0)
+
+	def test_beyond_cycle_fails(self) -> None:
+		with self.assertRaises(ValueError):
+			fourteenth.accumulated_due(550.0, 13)
+		with self.assertRaises(ValueError):
+			fourteenth.monthly_amount(-550.0)
 
 	def test_negative_months_fail(self) -> None:
 		with self.assertRaises(ValueError):
