@@ -1,0 +1,78 @@
+[project]
+name = "ec_hr"
+authors = [
+    { name = "Ecuador HR Contributors", email = "developers@example.com" }
+]
+description = "Ecuadorian Human Resources and Payroll Localization (IESS, statutory benefits) for Frappe / ERPNext v16 on HRMS v16"
+requires-python = ">=3.14"
+readme = "README.md"
+dynamic = ["version"]
+license = { text = "MIT" }
+dependencies = [
+    "pytz",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit>=4.0.0",
+    "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
+    "ruff==0.14.10",
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.frappe-dependencies]
+frappe = ">=16.0.0-dev,<17.0.0"
+erpnext = ">=16.0.0-dev,<17.0.0"
+
+[tool.pytest.ini_options]
+testpaths = ["ec_hr"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py314"
+exclude = [
+    ".agents/**",
+    "**/doctype/*/boilerplate/*.py",
+]
+
+[tool.ruff.lint]
+select = [
+    "F",
+    "E",
+    "W",
+    "I",
+    "UP",
+    "B",
+    "RUF",
+]
+ignore = [
+    "B017", # assertRaises(Exception) - should be more specific
+    "B018", # useless expression, not assigned to anything
+    "B023", # function doesn't bind loop variable - will have last iteration's value
+    "B904", # raise inside except without from
+    "E101", # indentation contains mixed spaces and tabs
+    "E402", # module level import not at top of file
+    "E501", # line too long
+    "E741", # ambiguous variable name
+    "F401", # "unused" imports
+    "F403", # can't detect undefined names from * import
+    "F405", # can't detect undefined names from * import
+    "F722", # syntax error in forward type annotation
+    "UP032", # f-string instead of format: Gettext messages keep static "{}".format() literals so bench pot extraction finds them (mirrors frappe core)
+    "UP030", # implicit references for positional format fields (translations, mirrors frappe core)
+    "UP031", # format specifiers instead of percent format (translations, mirrors frappe core)
+    "UP037", # quoted annotations (mirrors frappe core, translations)
+    "UP040", # type aliases instead of type annotations (translations, mirrors frappe core)
+    "W191", # indentation contains tabs
+]
+typing-modules = ["frappe.types.DF"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "tab"
+docstring-code-format = true
