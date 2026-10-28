@@ -49,12 +49,14 @@
    "reqd": 1
   },
   {
+   "description": "Tracks the applied amount; without it the balance never carries.",
    "fieldname": "salary_component",
    "fieldtype": "Link",
    "label": "Salary Component",
    "options": "Salary Component"
   },
   {
+   "description": "Internal slip field the hook injects into; stored as the field name.",
    "fieldname": "slip_field",
    "fieldtype": "Select",
    "label": "Slip Field",

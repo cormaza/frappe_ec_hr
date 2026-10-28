@@ -903,3 +903,11 @@ msgstr "Alimentos arrastrados"
 #: ec_hr/ecuador_hr/custom_fields.py
 msgid "Advance Carried"
 msgstr "Anticipo arrastrado"
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.json
+msgid "Tracks the applied amount; without it the balance never carries."
+msgstr "Rastrea el monto aplicado; sin esto el saldo nunca se arrastra."
+
+#: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.json
+msgid "Internal slip field the hook injects into; stored as the field name."
+msgstr "Campo interno del rol donde el hook inyecta; se guarda como nombre del campo."
