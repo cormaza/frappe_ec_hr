@@ -911,3 +911,31 @@ msgstr "Rastrea el monto aplicado; sin esto el saldo nunca se arrastra."
 #: ec_hr/ecuador_hr/doctype/ec_deduction_balance/ec_deduction_balance.json
 msgid "Internal slip field the hook injects into; stored as the field name."
 msgstr "Campo interno del rol donde el hook inyecta; se guarda como nombre del campo."
+
+#: ec_hr/payroll/company_currency.py
+msgid "Payroll amounts must be in USD, got currency: {0}."
+msgstr "Los montos de nómina deben estar en USD, moneda recibida: {0}."
+
+#: ec_hr/payroll/company_currency.py
+msgid "Payroll exchange rate must be 1 (USD), got: {0}."
+msgstr "El tipo de cambio de nómina debe ser 1 (USD), recibido: {0}."
+
+#: ec_hr/payroll/company_currency.py
+msgid "A company is required for this payroll operation."
+msgstr "Se requiere una compañía para esta operación de nómina."
+
+#: ec_hr/payroll/company_currency.py
+msgid "Mixed {0} values are not allowed: {1}."
+msgstr "No se permiten valores mezclados de {0}: {1}."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch employer RUC {0} does not match expected {1}."
+msgstr "El RUC empleador del lote {0} no coincide con el esperado {1}."
+
+#: ec_hr/payroll/iess_batch.py
+msgid "Batch branch {0} does not match expected {1}."
+msgstr "La sucursal del lote {0} no coincide con la esperada {1}."
+
+#: ec_hr/ecuador_hr/salary_slip_hooks.py
+msgid "Employee {0} has no company; set it before running payroll."
+msgstr "El empleado {0} no tiene compañía; asígnala antes de correr la nómina."

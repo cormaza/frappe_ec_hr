@@ -19,6 +19,7 @@ except ImportError:  # pragma: no cover
 
 def _doc(**overrides):  # type: ignore[no-untyped-def]
 	base = {
+		"company": "Acme",
 		"ec_overtime_daily_max_min": 0,
 		"ec_overtime_weekly_min": 0,
 		"net_pay": 0,
@@ -45,6 +46,31 @@ class TestValidateSalarySlipPure(UnitTestCase):
 
 	def test_clean_doc_passes(self) -> None:
 		validate_salary_slip(_doc(ec_overtime_daily_max_min=60, ec_overtime_weekly_min=120, net_pay=100))
+
+
+class TestValidateSalarySlipIsolation(UnitTestCase):
+	"""Multi-company / multi-currency hardening: one company, USD only."""
+
+	def test_missing_company_fails(self) -> None:
+		doc = _doc()
+		del doc.company
+		with self.assertRaises(_RING_ERRORS):
+			validate_salary_slip(doc)
+
+	def test_foreign_currency_fails(self) -> None:
+		with self.assertRaises(_RING_ERRORS):
+			validate_salary_slip(_doc(currency="EUR", exchange_rate=1.2))
+
+	def test_non_unit_rate_fails(self) -> None:
+		with self.assertRaises(_RING_ERRORS):
+			validate_salary_slip(_doc(currency="USD", exchange_rate=25000.0))
+
+	def test_employee_company_mismatch_fails(self) -> None:
+		with self.assertRaises(_RING_ERRORS):
+			validate_salary_slip(_doc(employee="EMP-001", employee_company="Other"))
+
+	def test_employee_company_match_passes(self) -> None:
+		validate_salary_slip(_doc(employee="EMP-001", employee_company="Acme"))
 
 
 @unittest.skipUnless(frappe is not None, "bench-only: needs frappe.get_doc")
