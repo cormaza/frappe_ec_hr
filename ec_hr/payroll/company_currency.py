@@ -19,17 +19,13 @@ except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
 		return message
 
 
-def assert_usd_only(
-	currency: str | None = None, exchange_rate: float | str | None = None
-) -> str:
+def assert_usd_only(currency: str | None = None, exchange_rate: float | str | None = None) -> str:
 	"""Require USD with a unit exchange rate; return the normalized code."""
 	code = (currency or "").strip().upper() or "USD"
 	if code != "USD":
 		raise ValueError(_("Payroll amounts must be in USD, got currency: {0}.").format(currency))
 	if exchange_rate is not None and abs(float(exchange_rate) - 1.0) > 1e-9:
-		raise ValueError(
-			_("Payroll exchange rate must be 1 (USD), got: {0}.").format(exchange_rate)
-		)
+		raise ValueError(_("Payroll exchange rate must be 1 (USD), got: {0}.").format(exchange_rate))
 	return "USD"
 
 
@@ -53,7 +49,5 @@ def assert_single_company(values: Iterable[Any], *, what: str = "company") -> st
 		if text and text not in distinct:
 			distinct.append(text)
 	if len(distinct) > 1:
-		raise ValueError(
-			_("Mixed {0} values are not allowed: {1}.").format(what, ", ".join(distinct))
-		)
+		raise ValueError(_("Mixed {0} values are not allowed: {1}.").format(what, ", ".join(distinct)))
 	return distinct[0] if distinct else ""
