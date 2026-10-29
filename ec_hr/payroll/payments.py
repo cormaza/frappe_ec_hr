@@ -10,6 +10,8 @@ import csv
 import io
 from typing import Any
 
+from ec_hr.payroll.company_currency import assert_single_company, assert_usd_only
+
 try:
 	from frappe import _
 except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
@@ -40,6 +42,8 @@ def validate_row(row: dict[str, Any], *, id_key: str = "id_number", amount_key: 
 		raise ValueError(_("Payment row lacks identity: {0}.").format(id_key))
 	if float(row.get(amount_key) or 0.0) <= 0:
 		raise ValueError(_("Payment row amount must be positive: {0}.").format(amount_key))
+	if "currency" in row or "exchange_rate" in row:
+		assert_usd_only(row.get("currency"), row.get("exchange_rate"))
 
 
 def matches_layout(rows: list[dict[str, Any]], layout: str | list[str]) -> bool:
@@ -56,6 +60,10 @@ def render_csv(
 	header: bool = True,
 ) -> str:
 	"""Render validated rows under the layout columns."""
+	assert_single_company((row.get("company") for row in rows), what="company")
+	for row in rows:
+		if "currency" in row or "exchange_rate" in row:
+			assert_usd_only(row.get("currency"), row.get("exchange_rate"))
 	columns = _columns_of(layout)
 	if not matches_layout(rows, columns):
 		raise ValueError(_("Payment rows miss layout columns."))
@@ -91,16 +99,20 @@ def pichincha_row(
 	numero_id: str,
 	nombre: str,
 	codigo_banco: str = "",
+	currency: str | None = None,
+	exchange_rate: float | None = None,
 ) -> dict[str, str]:
 	"""Build one Banco Pichincha mass-payment row (bank's own PDF pin).
 
 	Fixed TIPO=PA / MONEDA=USD / FORMA DE PAGO=CTA; VALOR as integer cents
 	(123.90 -> "12390"); TIPO CTA AHO/CTE; TIPO ID single char C/R/P; bank
-	code blank for Pichincha itself. Eleven documented fields: the PDF counts
+	code blank for Pichincha itself. MONEDA is fixed USD: any caller currency
+	rate other than USD/1 is rejected fail-closed. Eleven documented fields: the PDF counts
 	twelve columns but names only eleven, so the twelfth stays explicitly
 	unpinned (no invented column). Emit tab-delimited without header via
 	`render_csv(rows, layout, delimiter="\\t", header=False)`.
 	"""
+	assert_usd_only(currency, exchange_rate)
 	if not contrapartida.strip():
 		raise ValueError(_("Payment row lacks identity: contrapartida."))
 	if amount <= 0:

@@ -10,12 +10,33 @@ the page does not publish — they pass through validated only for shape.
 
 from datetime import date
 
+from ec_hr.payroll.company_currency import assert_single_company, require_company
+
 try:
 	from frappe import _
 except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
 
 	def _(message: str) -> str:
 		return message
+
+
+def assert_batch_header(
+	lines: list[str], *, employer_ruc: str | None = None, branch: str | None = None
+) -> str:
+	"""Require every batch line to share one employer RUC (and branch when given)."""
+	if not lines:
+		return require_company(employer_ruc) if employer_ruc is not None else ""
+	rucs = [line.split(";")[0] for line in lines]
+	branches = [line.split(";")[1] for line in lines if ";" in line]
+	rucc = assert_single_company(rucs, what="employer RUC")
+	assert_single_company(branches, what="branch")
+	if employer_ruc is not None and rucc != employer_ruc.strip():
+		raise ValueError(_("Batch employer RUC {0} does not match expected {1}.").format(rucc, employer_ruc))
+	if branch is not None:
+		only = assert_single_company(branches, what="branch")
+		if only != branch.strip():
+			raise ValueError(_("Batch branch {0} does not match expected {1}.").format(only, branch))
+	return rucc
 
 
 def _head(employer_ruc: str, branch: str, year: int, month: int, movement: str) -> list[str]:

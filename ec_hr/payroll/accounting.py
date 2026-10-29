@@ -7,6 +7,12 @@ Missing mappings fail loud naming the concept.
 
 from typing import Any
 
+from ec_hr.payroll.company_currency import (
+	assert_single_company,
+	assert_usd_only,
+	require_company,
+)
+
 try:
 	from frappe import _
 except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
@@ -16,9 +22,20 @@ except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
 
 
 def provision_lines(
-	items: list[dict[str, Any]], account_map: dict[str, dict[str, str]]
+	items: list[dict[str, Any]],
+	account_map: dict[str, dict[str, str]],
+	*,
+	company: str | None = None,
 ) -> list[dict[str, Any]]:
 	"""Expand provision items into balanced debit/credit lines."""
+	if company is not None:
+		expected = require_company(company)
+		assert_single_company([expected, *(item.get("company") for item in items)], what="company")
+	else:
+		assert_single_company((item.get("company") for item in items), what="company")
+	for item in items:
+		if "currency" in item or "exchange_rate" in item:
+			assert_usd_only(item.get("currency"), item.get("exchange_rate"))
 	lines = []
 	for item in items:
 		concept = str(item["concept"])
