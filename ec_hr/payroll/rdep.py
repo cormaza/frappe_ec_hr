@@ -8,6 +8,8 @@ pins in bench against the live schema — this module never invents it.
 import re
 from typing import Any
 
+from ec_hr.payroll.company_currency import assert_single_company, assert_usd_only
+
 try:
 	from frappe import _
 except ImportError:  # pragma: no cover - Ring 1 fallback, bench uses frappe._
@@ -33,6 +35,7 @@ def build_record(**fields: Any) -> dict[str, Any]:
 	"""Validate and return one worker's annual RDEP record."""
 	record = dict(fields)
 	_check_record(record)
+	assert_usd_only(record.get("currency"), record.get("exchange_rate"))
 	return record
 
 
@@ -40,6 +43,8 @@ def validate_batch(records: list[dict[str, Any]]) -> dict[str, float]:
 	"""Validate every record and return batch totals."""
 	for record in records:
 		_check_record(record)
+		assert_usd_only(record.get("currency"), record.get("exchange_rate"))
+	assert_single_company((record.get("company") for record in records), what="company")
 	return {
 		"workers": len(records),
 		"gross": round(sum(float(record["gross"]) for record in records), 2),
@@ -206,8 +211,11 @@ def rdep_xml(
 	tipo_empleador: str | None = None,
 	ente_seg_social: str | None = None,
 	schema: str = "2023",
+	currency: str | None = None,
+	exchange_rate: float | None = None,
 ) -> str:
 	"""Build the RDEP annex XML document (element order per the XSD)."""
+	assert_usd_only(currency, exchange_rate)
 	if schema != "2023":
 		raise ValueError(_("Unsupported RDEP schema pinned: {0}. Only 2023 is pinned.").format(schema))
 	if len(num_ruc) != 13 or not num_ruc.isdigit():
