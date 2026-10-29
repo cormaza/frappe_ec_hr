@@ -20,6 +20,7 @@ except ImportError:  # pragma: no cover - Ring 1 has no frappe package.
 
 
 from ec_hr.payroll.age import YouthCategory, youth_category
+from ec_hr.payroll.company_currency import require_company
 from ec_hr.payroll.contract import parse_contract_kind
 from ec_hr.payroll.identity import IdKind, is_valid_ci, is_valid_ruc
 
@@ -53,6 +54,7 @@ def _warn(message: str) -> None:
 
 def validate_employee(doc: Any, *_args: Any) -> None:
 	"""Validate Ecuadorian fields on an Employee document (doc_events hook)."""
+	require_company(getattr(doc, "company", None))
 	id_type = getattr(doc, "ec_id_type", None)
 	id_number = (getattr(doc, "ec_id_number", None) or "").strip()
 	if id_number:

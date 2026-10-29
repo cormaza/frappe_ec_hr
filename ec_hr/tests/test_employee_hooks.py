@@ -20,6 +20,7 @@ except ImportError:  # pragma: no cover
 
 def _doc(**overrides):  # type: ignore[no-untyped-def]
 	base = {
+		"company": "Acme",
 		"ec_id_type": None,
 		"ec_id_number": None,
 		"ec_id_validated": 0,
@@ -91,6 +92,16 @@ class TestValidateEmployeePure(UnitTestCase):
 
 	def test_empty_doc_passes(self) -> None:
 		validate_employee(_doc())
+
+
+class TestValidateEmployeeIsolation(UnitTestCase):
+	"""Multi-company hardening: every Employee belongs to one company."""
+
+	def test_missing_company_fails(self) -> None:
+		doc = _doc()
+		del doc.company
+		with self.assertRaises(_RING_ERRORS):
+			validate_employee(doc)
 
 
 @unittest.skipUnless(frappe is not None, "bench-only: needs frappe.get_doc")
