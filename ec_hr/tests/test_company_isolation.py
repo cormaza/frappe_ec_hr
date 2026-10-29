@@ -68,9 +68,7 @@ class TestIessBatchIsolation(UnitTestCase):
 
 	def test_single_ruc_batch_passes(self) -> None:
 		lines = [self._ent(), self._ent()]
-		self.assertEqual(
-			iess_batch.assert_batch_header(lines, employer_ruc="1790012345001"), "1790012345001"
-		)
+		self.assertEqual(iess_batch.assert_batch_header(lines, employer_ruc="1790012345001"), "1790012345001")
 
 	def test_mixed_ruc_batch_rejected(self) -> None:
 		lines = [self._ent(ruc="1790012345001"), self._ent(ruc="1790012345002")]
@@ -97,9 +95,7 @@ class TestAccountingIsolation(UnitTestCase):
 
 	def test_mixed_company_rejected(self) -> None:
 		with self.assertRaises(ValueError):
-			accounting.provision_lines(
-				[self._item(company="Acme"), self._item(company="Other")], self._map()
-			)
+			accounting.provision_lines([self._item(company="Acme"), self._item(company="Other")], self._map())
 
 	def test_explicit_company_mismatch_rejected(self) -> None:
 		with self.assertRaises(ValueError):

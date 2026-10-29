@@ -37,6 +37,7 @@ line-length = 110
 target-version = "py314"
 exclude = [
     ".agents/**",
+    ".git/**",
     "**/doctype/*/boilerplate/*.py",
 ]
 
